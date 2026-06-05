@@ -1,0 +1,20 @@
+{
+  "name": "agentdx",
+  "description": "Marketplace for agentdx - assess repository agentic engineering readiness",
+  "owner": {
+    "name": "ra1han",
+    "email": "ra1han@github.com"
+  },
+  "plugins": [
+    {
+      "name": "agentdx",
+      "description": "Assess repository agentic engineering readiness. Scores config files, instruction quality, MCP setup, skills, repo structure, and CI/CD integration.",
+      "version": "1.0.0",
+      "source": "./",
+      "author": {
+        "name": "ra1han",
+        "email": "ra1han@github.com"
+      }
+    }
+  ]
+}
