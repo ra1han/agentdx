@@ -25,7 +25,7 @@ Install as a skill plugin, then ask:
 ### Claude Code
 
 Reference the skill in your project, then ask:
-> "Run an ai-ready scan"
+> "Run an agentdx scan"
 
 ### Selective Scanning
 

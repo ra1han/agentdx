@@ -4,7 +4,7 @@
 
 **Goal:** Create the AgentDX skill files that assess repository agentic engineering readiness and produce a scored report.
 
-**Architecture:** Modular prompt-based skill with an orchestrator (`ai-ready.md`) that references category-specific check files and a shared rubric. No code — pure markdown/prompt content that runs inside Copilot or Claude Code sessions.
+**Architecture:** Modular prompt-based skill with an orchestrator (`agentdx/SKILL.md`) that references category-specific check files and a shared rubric. No code — pure markdown/prompt content that runs inside Copilot or Claude Code sessions.
 
 **Tech Stack:** Markdown skill files (no runtime dependencies)
 
@@ -14,7 +14,7 @@
 
 ```
 skills/
-├── ai-ready.md              # Orchestrator: entry point, selective/full scan logic, report assembly
+├── agentdx.md               # Orchestrator: entry point, selective/full scan logic, report assembly
 ├── categories/
 │   ├── agent-configs.md     # Check: agent config file presence & completeness
 │   ├── instruction-quality.md # Check: prompt/instruction quality evaluation
@@ -598,18 +598,18 @@ git commit -m "feat: add ci-cd category check"
 ### Task 9: Main Orchestrator Skill
 
 **Files:**
-- Create: `skills/ai-ready.md`
+- Create: `skills/agentdx.md`
 
 - [ ] **Step 1: Create the orchestrator skill**
 
-Create `skills/ai-ready.md` — this is the main entry point that ties everything together:
+Create `skills/agentdx.md` — this is the main entry point that ties everything together:
 
 ```markdown
-# AI-Ready: Agentic Engineering Readiness Assessment
+# AgentDX: Agentic Engineering Readiness Assessment
 
 Assess how well a repository is set up for agentic engineering workflows. Produces a score (0–100) with actionable findings.
 
-**Trigger phrases:** "check agent readiness", "ai-ready scan", "assess my repo for agents", "agentdx score", "how agent-friendly is this repo"
+**Trigger phrases:** "check agent readiness", "agentdx scan", "assess my repo for agents", "agentdx score", "how agent-friendly is this repo"
 
 ## Instructions
 
@@ -686,8 +686,8 @@ Output the report directly in chat. Do not write it to a file unless the user as
 - [ ] **Step 2: Commit**
 
 ```bash
-git add skills/ai-ready.md
-git commit -m "feat: add ai-ready orchestrator skill"
+git add skills/agentdx.md
+git commit -m "feat: add agentdx orchestrator skill"
 ```
 
 ---
@@ -729,7 +729,7 @@ Install as a skill plugin, then ask:
 ### Claude Code
 
 Reference the skill in your project, then ask:
-> "Run an ai-ready scan"
+> "Run an agentdx scan"
 
 ### Selective Scanning
 
@@ -794,7 +794,7 @@ git commit -m "feat: add project README with usage and installation docs"
 - [ ] **Step 1: Verify all files exist**
 
 Run: `find skills/ -type f` (or equivalent) and confirm all expected files are present:
-- `skills/ai-ready.md`
+- `skills/agentdx.md`
 - `skills/shared/rubric.md`
 - `skills/shared/report-format.md`
 - `skills/categories/agent-configs.md`

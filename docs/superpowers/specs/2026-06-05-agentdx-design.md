@@ -26,7 +26,7 @@ AgentDX is a skill-based plugin for GitHub Copilot and Claude Code that assesses
 ```
 agentdx/
 ├── skills/
-│   ├── ai-ready.md              # Main orchestrator skill (full scan or selective)
+│   ├── agentdx.md               # Main orchestrator skill (full scan or selective)
 │   ├── categories/
 │   │   ├── agent-configs.md     # Category: config file presence & completeness
 │   │   ├── instruction-quality.md # Category: prompt/instruction quality evaluation
@@ -45,7 +45,7 @@ agentdx/
 
 ### Flow
 
-1. User invokes the `ai-ready` skill (or a specific category)
+1. User invokes the `agentdx` skill (or a specific category)
 2. Skill reads `rubric.md` for criteria and weights
 3. Runs selected (or all) category checks by reading repo files
 4. Each category produces a 0–100 score with individual findings
@@ -54,7 +54,7 @@ agentdx/
 
 ### Platform Delivery
 
-- **GitHub Copilot:** Installed as a plugin via the superpowers/installed-plugins convention. Skill name `ai-ready` with trigger phrases for discovery.
+- **GitHub Copilot:** Installed as a plugin via the superpowers/installed-plugins convention. Skill name `agentdx` with trigger phrases for discovery.
 - **Claude Code:** Referenced from project config or installed via Claude's skill mechanism. Same skill content with a thin platform-specific wrapper.
 - **Shared content:** Rubric, category checks, and report format are platform-agnostic markdown. Only entry point metadata differs.
 
