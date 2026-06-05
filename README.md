@@ -66,7 +66,7 @@ AgentDX produces a hybrid score + checklist report:
 
 ```bash
 copilot plugin marketplace add ra1han/agentdx
-copilot plugin install agentdx
+copilot plugin install agentdx@agentdx
 ```
 
 **Or install directly from the repository:**
@@ -77,7 +77,24 @@ copilot plugin install ra1han/agentdx
 
 ### Claude Code
 
-Reference the skill path in your project configuration or symlink the skills directory.
+**Install from a marketplace (if added):**
+
+```bash
+/plugin marketplace add ra1han/agentdx
+/plugin install agentdx
+```
+
+**Or load directly during development:**
+
+```bash
+claude --plugin-dir ./agentdx
+```
+
+Once installed, use the skill:
+
+```
+/agentdx:agentdx
+```
 
 ## License
 
