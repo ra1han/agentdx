@@ -60,11 +60,19 @@ AgentDX produces a hybrid score + checklist report:
 
 ## Installation
 
-### GitHub Copilot (Superpowers)
+### GitHub Copilot CLI
 
-Clone or add as a plugin:
+**Add the marketplace and install the plugin:**
+
 ```bash
-git clone https://github.com/ra1han/agentdx.git ~/.copilot/installed-plugins/agentdx
+copilot plugin marketplace add ra1han/agentdx
+copilot plugin install agentdx
+```
+
+**Or install directly from the repository:**
+
+```bash
+copilot plugin install ra1han/agentdx
 ```
 
 ### Claude Code
