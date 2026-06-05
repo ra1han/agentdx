@@ -1,3 +1,8 @@
+---
+name: ai-ready
+description: "Assess repository agentic engineering readiness. Scores agent config files, instruction quality, MCP setup, custom skills, repo structure, and CI/CD integration (0-100)."
+---
+
 # AI-Ready: Agentic Engineering Readiness Assessment
 
 Assess how well a repository is set up for agentic engineering workflows. Produces a score (0–100) with actionable findings.
@@ -24,7 +29,7 @@ Available categories:
 
 ### 2. Load Rubric
 
-Read `skills/shared/rubric.md` for scoring weights and grade labels.
+Read `skills/ai-ready/shared/rubric.md` for scoring weights and grade labels.
 
 ### 3. Execute Category Checks
 
@@ -32,12 +37,12 @@ For each selected category, read the corresponding category file and evaluate th
 
 | Category | File |
 |----------|------|
-| Agent Config Files | `skills/categories/agent-configs.md` |
-| Instruction Quality | `skills/categories/instruction-quality.md` |
-| MCP Server Setup | `skills/categories/mcp-setup.md` |
-| Custom Skills/Commands | `skills/categories/custom-skills.md` |
-| Repository Structure | `skills/categories/repo-structure.md` |
-| CI/CD Integration | `skills/categories/ci-cd.md` |
+| Agent Config Files | `skills/ai-ready/categories/agent-configs.md` |
+| Instruction Quality | `skills/ai-ready/categories/instruction-quality.md` |
+| MCP Server Setup | `skills/ai-ready/categories/mcp-setup.md` |
+| Custom Skills/Commands | `skills/ai-ready/categories/custom-skills.md` |
+| Repository Structure | `skills/ai-ready/categories/repo-structure.md` |
+| CI/CD Integration | `skills/ai-ready/categories/ci-cd.md` |
 
 For each category:
 1. Read the category file to understand what to check and how to score
@@ -55,7 +60,7 @@ Overall score = sum of (category_score × normalized_weight)
 
 ### 5. Format Report
 
-Read `skills/shared/report-format.md` and produce the report following that template exactly.
+Read `skills/ai-ready/shared/report-format.md` and produce the report following that template exactly.
 
 Include:
 - Overall score with grade label
