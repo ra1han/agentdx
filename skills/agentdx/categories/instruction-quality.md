@@ -32,9 +32,14 @@ Check for coverage of:
 - Constraints / prohibitions (what NOT to do)
 - Dependencies / key libraries and their usage patterns
 
+**Tech-stack-aware checking**: Detect the repository's tech stack (see `skills/agentdx/shared/tech-stacks.md`) and verify that instruction files mention the expected commands and patterns for each detected stack. For example:
+- Node.js repo without `npm`/`yarn`/`pnpm` commands mentioned → gap
+- Python repo without `pip`/`pytest`/`venv` mentioned → gap
+- Go repo without `go build`/`go test` mentioned → gap
+
 Scoring:
-- **Pass**: 4–5 areas covered
-- **Partial**: 2–3 areas covered
+- **Pass**: 4–5 areas covered AND stack-specific commands are present for detected tech
+- **Partial**: 2–3 areas covered; OR areas covered but stack-specific commands missing
 - **Fail**: 0–1 areas covered
 
 ### 4. Brevity & Focus (20% of category score)

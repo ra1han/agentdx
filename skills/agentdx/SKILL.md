@@ -48,8 +48,9 @@ For each selected category, read the corresponding category file and evaluate th
 
 For each category:
 1. Read the category file to understand what to check and how to score
-2. Use your tools (file search, file reading) to examine the target repository
-3. Evaluate each criterion as Pass/Partial/Fail
+2. Detect the repository's tech stack using `skills/agentdx/shared/tech-stacks.md` as reference
+3. Use your tools (file search, file reading) to examine the target repository
+4. Evaluate each criterion as Pass/Partial/Fail
 4. Calculate the category score (0–100)
 5. Record individual findings with status emojis (✅ ⚠️ ❌)
 
