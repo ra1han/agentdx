@@ -8,12 +8,13 @@ AgentDX is a skill-based plugin that runs inside GitHub Copilot and Claude Code 
 
 | Category | Weight | What It Evaluates |
 |----------|--------|-------------------|
-| Agent Config Files | 25% | Presence and completeness of AGENTS.md, copilot-instructions, CLAUDE.md, etc. |
-| Instruction Quality | 25% | Specificity, actionability, and completeness of agent instructions |
-| MCP Server Setup | 15% | MCP configuration files and tool definitions |
-| Custom Skills/Commands | 15% | Project-specific skills and workflow definitions |
-| Repository Structure | 10% | README quality, docs, folder organization |
-| CI/CD Integration | 10% | Documented build/test/lint commands for agents |
+| Agent Config Files | 20% | Presence and completeness of AGENTS.md, copilot-instructions, CLAUDE.md, .claude/ ecosystem |
+| Instruction Quality | 20% | Specificity, actionability, brevity, structure, and cross-references |
+| MCP Server Setup | 15% | MCP configuration, server relevance, and security |
+| Custom Skills/Commands | 15% | Project-specific skills, structure quality, and discoverability |
+| Security & Git Hygiene | 15% | Secrets detection, gitignore patterns, dangerous permissions |
+| Repository Structure | 8% | README quality, docs, folder organization |
+| CI/CD Integration | 7% | Documented build/test/lint commands for agents |
 
 ## Usage
 

@@ -24,8 +24,9 @@ Available categories:
 2. Instruction Quality
 3. MCP Server Setup
 4. Custom Skills/Commands
-5. Repository Structure
-6. CI/CD Integration
+5. Security & Git Hygiene
+6. Repository Structure
+7. CI/CD Integration
 
 ### 2. Load Rubric
 
@@ -41,6 +42,7 @@ For each selected category, read the corresponding category file and evaluate th
 | Instruction Quality | `skills/agentdx/categories/instruction-quality.md` |
 | MCP Server Setup | `skills/agentdx/categories/mcp-setup.md` |
 | Custom Skills/Commands | `skills/agentdx/categories/custom-skills.md` |
+| Security & Git Hygiene | `skills/agentdx/categories/security.md` |
 | Repository Structure | `skills/agentdx/categories/repo-structure.md` |
 | CI/CD Integration | `skills/agentdx/categories/ci-cd.md` |
 
@@ -76,6 +78,9 @@ Output the report directly in chat. Do not write it to a file unless the user as
 
 - This is an assessment tool. Do NOT offer to fix issues unless the user explicitly asks.
 - Be fair in scoring: not every project needs every feature. Context matters.
-- For MCP and Custom Skills categories: if a project is simple enough that these don't apply, note this and give a neutral score rather than penalizing.
+- For MCP and Custom Skills categories: if a project is simple enough that these don't apply, note this and give a neutral score (50) rather than penalizing.
 - Instruction Quality depends on Agent Config Files — if no config files exist, Instruction Quality automatically scores 0.
+- Security: if no `.claude/` directory exists, only score secrets and sensitive files criteria.
 - Be specific in findings. "Missing X" is better than "could be improved."
+- If the user asks for JSON output, use the JSON format defined in the report format file.
+- If the user wants fixes applied, suggest using the `setup-doctor` agent instead.
