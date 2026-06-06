@@ -72,7 +72,18 @@ Include:
 
 ### 6. Present Results
 
-Output the report directly in chat. Do not write it to a file unless the user asks.
+Output the report directly in chat AND save it to the repository:
+
+1. **Chat output**: Always display the full report in the conversation
+2. **File output**: Save the results to `.agentdx/` directory:
+   - `.agentdx/report.md` — human-readable markdown report
+   - `.agentdx/report.json` — machine-readable JSON (using the JSON schema from report-format.md)
+
+The JSON file should include a `timestamp` field (ISO 8601) so teams can track score changes over time.
+
+If `.agentdx/` directory doesn't exist, create it. If previous reports exist, overwrite them (latest scan only).
+
+Suggest the user add `.agentdx/` to `.gitignore` if they don't want reports committed, or commit them for team visibility/CI tracking.
 
 ## Important Notes
 

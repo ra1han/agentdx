@@ -62,10 +62,11 @@ When running a selective scan, add after the header:
 
 ## JSON Output Mode
 
-If the user requests JSON output (e.g., "output as JSON", "give me JSON", "machine-readable"), produce a structured JSON report instead of the markdown format above:
+The JSON report is always saved to `.agentdx/report.json`. It is also displayed in chat if the user requests JSON output (e.g., "output as JSON", "give me JSON", "machine-readable").
 
 ```json
 {
+  "timestamp": "2026-06-06T18:00:00Z",
   "score": 72,
   "grade": "Good",
   "categories": {

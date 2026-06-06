@@ -38,7 +38,7 @@ You can scan specific categories:
 
 ### JSON Output
 
-Request machine-readable output for CI pipelines:
+Results are automatically saved to `.agentdx/report.json` and `.agentdx/report.md` for tracking over time. Request JSON in chat with:
 > "Run agentdx scan and output as JSON"
 
 ## Output
