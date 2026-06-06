@@ -1,0 +1,20 @@
+{
+  "name": "agentdx-marketplace",
+  "interface": {
+    "displayName": "AgentDX Plugins"
+  },
+  "plugins": [
+    {
+      "name": "agentdx",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

@@ -108,6 +108,20 @@ copilot plugin install agentdx
 copilot plugin install ra1han/agentdx
 ```
 
+### OpenAI Codex
+
+**Add the marketplace and install:**
+
+```bash
+codex plugin marketplace add ra1han/agentdx
+```
+
+**Or load directly during development:**
+
+```bash
+codex --plugin-dir ./agentdx
+```
+
 ### Claude Code
 
 **Install from a marketplace (if added):**
@@ -133,6 +147,10 @@ Once installed, use the skill:
 
 ```
 agentdx/
+├── .codex-plugin/
+│   └── plugin.json            # OpenAI Codex plugin manifest
+├── .agents/plugins/
+│   └── marketplace.json       # Codex marketplace registry
 ├── .claude-plugin/
 │   ├── plugin.json            # Claude Code plugin manifest
 │   └── marketplace.json       # Claude Code marketplace registry

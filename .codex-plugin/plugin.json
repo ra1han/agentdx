@@ -1,0 +1,29 @@
+{
+  "name": "agentdx",
+  "version": "1.1.0",
+  "description": "Assess repository agentic engineering readiness. Scores config files, instruction quality, MCP setup, skills, repo structure, security, and CI/CD integration.",
+  "author": {
+    "name": "ra1han",
+    "email": "ra1han@github.com",
+    "url": "https://github.com/ra1han"
+  },
+  "homepage": "https://github.com/ra1han/agentdx",
+  "repository": "https://github.com/ra1han/agentdx",
+  "license": "MIT",
+  "keywords": ["agentdx", "agent-readiness", "scoring", "assessment", "audit", "lint"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "AgentDX",
+    "shortDescription": "Score your repo's agent-friendliness (0-100)",
+    "longDescription": "Assess how well your repository is set up for agentic engineering workflows. Scans agent config files, instruction quality, MCP setup, custom skills, security & git hygiene, repo structure, and CI/CD integration. Produces a scored report with actionable findings and recommendations.",
+    "developerName": "ra1han",
+    "category": "Productivity",
+    "capabilities": ["Read"],
+    "websiteURL": "https://github.com/ra1han/agentdx",
+    "defaultPrompt": [
+      "Run an agentdx scan on this repo",
+      "Check my repo's agent readiness",
+      "Assess agent-friendliness of this codebase"
+    ]
+  }
+}
