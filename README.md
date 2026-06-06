@@ -18,18 +18,34 @@ AgentDX is a skill-based plugin that runs inside GitHub Copilot and Claude Code 
 
 ## Usage
 
-### GitHub Copilot
+### Skill vs Agent
+
+AgentDX provides two modes of operation:
+
+| | **agentdx skill** | **agentdx-fix agent** |
+|--|-------------------|----------------------|
+| **Purpose** | Assess and score your repo | Assess, then fix issues |
+| **Mode** | Read-only audit | Interactive remediation |
+| **Output** | Score report with findings | Report + generated/fixed files |
+| **Use when** | You want a quick health check | You want guided fixes applied |
+| **Invocation** | `/agentdx:agentdx` or natural language | `/agents` → agentdx-fix |
+
+### GitHub Copilot CLI
 
 Install as a skill plugin, then ask:
 > "Check my repo's agent readiness"
 
+Note: The agentdx-fix agent is Claude Code only. On Copilot CLI, the skill provides assessment and you apply fixes manually.
+
 ### Claude Code
 
-Install the plugin, then ask:
+**Run a scan (skill — read-only):**
 > "Run an agentdx scan"
 
-Or use the agentdx-fix agent for guided fixes:
+**Diagnose and fix (agent — interactive):**
 > "Run agentdx-fix"
+
+The agent will scan your repo, show the report, then ask which issues you'd like fixed. It can generate CLAUDE.md, .gitignore entries, skill skeletons, and more — always with your confirmation before writing files.
 
 ### Selective Scanning
 
