@@ -8,7 +8,7 @@ AgentDX is a skill-based plugin that runs inside GitHub Copilot and Claude Code 
 
 | Category | Weight | What It Evaluates |
 |----------|--------|-------------------|
-| Agent Config Files | 20% | Presence and completeness of AGENTS.md, copilot-instructions, CLAUDE.md, .claude/ ecosystem |
+| Agent Config Files | 20% | Presence of AGENTS.md, copilot-instructions, CLAUDE.md, .claude/ ecosystem files |
 | Instruction Quality | 20% | Specificity, actionability, brevity, structure, and cross-references |
 | MCP Server Setup | 15% | MCP configuration, server relevance, and security |
 | Custom Skills/Commands | 15% | Project-specific skills, structure quality, and discoverability |
@@ -25,17 +25,25 @@ Install as a skill plugin, then ask:
 
 ### Claude Code
 
-Reference the skill in your project, then ask:
+Install the plugin, then ask:
 > "Run an agentdx scan"
+
+Or use the Setup Doctor agent for guided fixes:
+> "Run setup-doctor"
 
 ### Selective Scanning
 
 You can scan specific categories:
-> "Check only my agent config files and instruction quality"
+> "Check only my agent config files and security"
+
+### JSON Output
+
+Request machine-readable output for CI pipelines:
+> "Run agentdx scan and output as JSON"
 
 ## Output
 
-AgentDX produces a hybrid score + checklist report:
+AgentDX produces a scored report with per-category findings:
 
 ```
 ## AgentDX Score: 72/100 (Good)
@@ -45,18 +53,26 @@ AgentDX produces a hybrid score + checklist report:
 |-----------------------|-------|--------|
 | Agent Config Files    | 85    | ✅     |
 | Instruction Quality   | 70    | ⚠️     |
-| ...                   | ...   | ...    |
+| MCP Server Setup      | 50    | ⚠️     |
+| Custom Skills         | 60    | ⚠️     |
+| Security & Git Hygiene| 90    | ✅     |
+| Repository Structure  | 75    | ⚠️     |
+| CI/CD Integration     | 65    | ⚠️     |
 
 ### Findings
 #### Agent Config Files (85/100)
 - ✅ `.github/copilot-instructions.md` exists and is substantive
-- ⚠️ `CLAUDE.md` present but missing constraints section
+- ✅ `.claude/settings.json` committed with proper permissions
+- ⚠️ `CLAUDE.md` present but over 400 lines — consider trimming
 - ❌ No `.cursorrules` file found
 
+### Detected Platforms
+Active agent platforms: Claude Code, GitHub Copilot
+
 ### Top 3 Recommendations
-1. Add constraints section to CLAUDE.md
-2. Create .cursorrules for Cursor users
-3. Document test commands in agent config
+1. Trim CLAUDE.md to <200 lines, move details to .claude/rules/ (+8 points)
+2. Add .cursorrules for Cursor users (+5 points)
+3. Create .mcp.json with project-relevant servers (+4 points)
 ```
 
 ## Installation
@@ -67,7 +83,7 @@ AgentDX produces a hybrid score + checklist report:
 
 ```bash
 copilot plugin marketplace add ra1han/agentdx
-copilot plugin install agentdx@agentdx
+copilot plugin install agentdx
 ```
 
 **Or install directly from the repository:**
@@ -95,6 +111,27 @@ Once installed, use the skill:
 
 ```
 /agentdx:agentdx
+```
+
+## Plugin Structure
+
+```
+agentdx/
+├── .claude-plugin/
+│   ├── plugin.json            # Claude Code plugin manifest
+│   └── marketplace.json       # Claude Code marketplace registry
+├── .github/plugin/
+│   ├── plugin.json            # Copilot CLI plugin manifest
+│   └── marketplace.json       # Copilot CLI marketplace registry
+├── skills/agentdx/
+│   ├── SKILL.md               # Main assessment skill
+│   ├── categories/            # Scoring rubrics per category
+│   └── shared/                # Rubric weights & report format
+├── agents/
+│   └── setup-doctor.md        # Diagnostic & fix agent
+├── plugin.json                # Root plugin metadata
+├── CHANGELOG.md               # Version history
+└── README.md
 ```
 
 ## License
