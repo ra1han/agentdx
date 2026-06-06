@@ -1,5 +1,5 @@
 ---
-name: setup-doctor
+name: agentdx-fix
 description: "A diagnostic agent that audits your repository's agent-friendliness. Runs the agentdx assessment and offers to fix issues found."
 model: default
 tools:

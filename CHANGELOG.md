@@ -6,7 +6,7 @@ All notable changes to AgentDX will be documented in this file.
 
 ### Added
 - **Security & Git Hygiene category** — new category scanning for hardcoded secrets, gitignore patterns for agent files, dangerous permissions, and sensitive file exposure
-- **Setup Doctor agent** (`agents/setup-doctor.md`) — subagent that runs the assessment and offers to fix issues
+- **Setup Doctor agent** (`agents/agentdx-fix.md`) — subagent that runs the assessment and offers to fix issues
 - **JSON output mode** — request machine-readable output for CI integration
 - **Platform detection** — informational reporting of which agent platforms are in use
 - **Claude Code ecosystem checks** — `.claude/settings.json`, `.claude/rules/`, `.claude/agents/`, hooks detection

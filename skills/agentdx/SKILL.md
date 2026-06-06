@@ -83,4 +83,4 @@ Output the report directly in chat. Do not write it to a file unless the user as
 - Security: if no `.claude/` directory exists, only score secrets and sensitive files criteria.
 - Be specific in findings. "Missing X" is better than "could be improved."
 - If the user asks for JSON output, use the JSON format defined in the report format file.
-- If the user wants fixes applied, suggest using the `setup-doctor` agent instead.
+- If the user wants fixes applied, suggest using the `agentdx-fix` agent instead.

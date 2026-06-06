@@ -28,8 +28,8 @@ Install as a skill plugin, then ask:
 Install the plugin, then ask:
 > "Run an agentdx scan"
 
-Or use the Setup Doctor agent for guided fixes:
-> "Run setup-doctor"
+Or use the agentdx-fix agent for guided fixes:
+> "Run agentdx-fix"
 
 ### Selective Scanning
 
@@ -128,7 +128,7 @@ agentdx/
 │   ├── categories/            # Scoring rubrics per category
 │   └── shared/                # Rubric weights & report format
 ├── agents/
-│   └── setup-doctor.md        # Diagnostic & fix agent
+│   └── agentdx-fix.md         # Diagnostic & fix agent
 ├── plugin.json                # Root plugin metadata
 ├── CHANGELOG.md               # Version history
 └── README.md
