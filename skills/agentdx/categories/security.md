@@ -5,6 +5,8 @@ Assess whether the repository properly handles secrets, credentials, and agent-r
 
 ## Criteria
 
+For tool-scoped scans, keep general repository secret hygiene in scope, but filter agent-specific checks to the requested platform. For example, a GitHub Copilot scan should check `.github/**`, `.vscode/mcp.json`, `.github/copilot/mcp.json`, and general secrets, but should not inspect or penalize `CLAUDE.md`, `.claude/settings.json`, `.claude/settings.local.json`, or `.claude/memory/`.
+
 ### 1. Secrets in Repository (30% of category score)
 Check that no hardcoded secrets, API keys, or credentials are committed.
 
@@ -29,8 +31,12 @@ Patterns to scan for in tracked files:
 
 Note: Exclude false positives in documentation, examples, and test fixtures that use obviously fake values.
 
+For tool-scoped scans, scan only MCP files relevant to the target platform plus general secret-bearing files such as `.env` patterns.
+
 ### 2. Agent File Gitignore (30% of category score)
 Verify that personal/local agent files are properly gitignored while shared configs are committed.
+
+For tool-scoped scans, apply this criterion only to personal/local files and shared configs for the requested platform. If the target platform has no known local-state files in this rubric, mark irrelevant checks N/A and reweight the remaining security criteria.
 
 **Should be gitignored (personal state):**
 - `.claude/settings.local.json` — personal overrides
@@ -62,6 +68,8 @@ Where to check:
 - Look for `allow` rules with wildcards on destructive commands
 - Flag: `git push`, `git force-push`, `rm -rf`, `DROP TABLE`, `kubectl delete`
 
+This criterion applies to Claude Code scans and cross-platform scans. For GitHub Copilot, Cursor, or Windsurf scans, mark it N/A unless an in-scope platform config exposes comparable permission rules.
+
 ### 4. Sensitive Files Excluded from Agent Context (20% of category score)
 Are sensitive directories/files excluded from agent access or clearly marked?
 
@@ -72,18 +80,18 @@ Are sensitive directories/files excluded from agent access or clearly marked?
 Things to check:
 - Presence of `.git-credentials`, `*.pem`, `*.key` in repo
 - Production config with real credentials committed
-- Agent instructions (CLAUDE.md) mentioning what files/directories to avoid
+- In-scope agent instructions mentioning what files/directories to avoid
 - `.claude/settings.json` deny rules for sensitive paths
 
 ## How to Evaluate
 
-1. Check `.gitignore` for proper agent file patterns
+1. Check `.gitignore` for proper in-scope agent file patterns
 2. Scan for common secret patterns in tracked files (focus on config files, not all source)
-3. If `.claude/settings.json` exists, check permission rules
+3. If `.claude/settings.json` exists and Claude Code is in scope, check permission rules
 4. Look for sensitive file types committed to the repository
-5. Scan MCP config files for hardcoded secrets (see criterion 1 patterns)
-6. Cross-reference with agent instruction files for documented exclusions
-7. Calculate category score using the weights above
+5. Scan in-scope MCP config files for hardcoded secrets (see criterion 1 patterns)
+6. Cross-reference with in-scope agent instruction files for documented exclusions
+7. Calculate category score using the weights above, reweighting criteria marked N/A
 
 ## Important Notes
 

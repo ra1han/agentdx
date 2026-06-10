@@ -53,6 +53,11 @@ The agent will scan your repo, show the report, then ask which issues you'd like
 You can scan specific categories:
 > "Check only my agent config files and security"
 
+You can also scope a scan to a specific tool/platform:
+> "Run agentdx scan for Copilot"
+
+Tool-scoped scans report only issues relevant to that platform plus universal repository hygiene. For example, a Copilot scan ignores `CLAUDE.md` and `.claude/` files entirely.
+
 ### JSON Output
 
 Results are automatically saved to `.agentdx/report.json` and `.agentdx/report.md` for tracking over time. Request JSON in chat with:

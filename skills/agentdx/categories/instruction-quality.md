@@ -6,6 +6,8 @@ Evaluate the quality of content in agent configuration files — not just presen
 ## Prerequisites
 This category evaluates files found by the "Agent Config Files" category. If no agent config files exist, this category scores 0.
 
+For tool-scoped scans, evaluate only the files that Agent Config Files marked in scope for the requested platform. Do not read, score, compare, or recommend fixes for non-target platform files. For example, when the target platform is GitHub Copilot, ignore `CLAUDE.md` and `.claude/**` entirely; do not count their content, length, contradictions, or cross-references.
+
 ## Criteria
 
 ### 1. Specificity (20% of category score)
@@ -45,7 +47,7 @@ Scoring:
 ### 4. Brevity & Focus (20% of category score)
 Is the file concise and focused, or bloated with low-signal content?
 
-- **Pass**: Under 200 lines (root CLAUDE.md), uses progressive disclosure (links to docs/skills for details), no large embedded code blocks
+- **Pass**: Under 200 lines for the primary in-scope instruction file (for example, root `CLAUDE.md` in Claude scans or `.github/copilot-instructions.md` in Copilot scans), uses progressive disclosure (links to docs/skills for details), no large embedded code blocks
 - **Partial**: 200–400 lines, some bloat but still navigable; OR contains large code samples that could be moved to reference files
 - **Fail**: Over 400 lines; dump of everything including volatile/task-specific notes, /init-generated boilerplate, or entire code samples
 
@@ -65,7 +67,7 @@ Is the file well-organized with clear navigation and proper linking?
 Additional checks:
 - Look for heading patterns: `## Project`, `## Commands`, `## Stack`, `## Architecture`
 - Detect `@FILENAME` references or markdown links to other repo docs
-- If both `CLAUDE.md` and `AGENTS.md` exist, check that one references the other (e.g., `@AGENTS.md` or `[AGENTS.md](./AGENTS.md)`)
+- If both `CLAUDE.md` and `AGENTS.md` exist in a cross-platform or Claude scan, check that one references the other (e.g., `@AGENTS.md` or `[AGENTS.md](./AGENTS.md)`). Do not apply this check in Copilot, Cursor, or Windsurf scans when `CLAUDE.md` is outside the target platform scope.
 - If repo has `docs/` folder but instruction files never link to it, suggest adding pointers
 - Detect the "table-of-contents approach": short root file linking to scoped rules/skills
 
@@ -97,11 +99,11 @@ Additional checks:
 
 ## How to Evaluate
 
-1. Read all agent config files found in the repository
-2. For each criterion, evaluate across ALL config files (not just one)
+1. Read all in-scope agent config files found in the repository
+2. For each criterion, evaluate across all in-scope config files (not just one)
 3. Count lines and detect structural elements (headings, code blocks, references)
-4. Check cross-file coherence (do files reference each other, or duplicate/contradict?)
-5. Search for custom skills/commands and assess quality if present
+4. Check cross-file coherence only among in-scope files (do files reference each other, or duplicate/contradict?)
+5. Search for custom skills/commands relevant to the target platform and assess quality if present
 6. Use your judgment as an experienced developer: would these instructions actually help you work in this codebase?
 7. Calculate category score: sum criteria 1–5 (each 20%), then apply consistency penalty and skill bonus
 8. Cap final score at 0 minimum (consistency penalty cannot make score negative); cap at 100 maximum

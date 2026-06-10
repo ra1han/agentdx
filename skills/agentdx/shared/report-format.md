@@ -8,6 +8,11 @@ When presenting results, use this exact structure:
 ## AgentDX Score: {overall_score}/100 ({grade_label})
 ```
 
+For tool-scoped scans, add immediately after the header:
+```
+> Target platform: {platform_name}
+```
+
 ## Category Breakdown Table
 
 ```
@@ -67,6 +72,7 @@ The JSON report is always saved to `.agentdx/report.json`. It is also displayed 
 ```json
 {
   "timestamp": "2026-06-06T18:00:00Z",
+  "target_platform": "GitHub Copilot",
   "score": 72,
   "grade": "Good",
   "categories": {

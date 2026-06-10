@@ -5,6 +5,17 @@ Assess the presence, location, and completeness of agent configuration files in 
 
 ## Files to Check
 
+When the main skill specifies a target platform, filter this list before scoring:
+
+| Target Platform | Include | Exclude |
+|-----------------|---------|---------|
+| GitHub Copilot | `AGENTS.md`, `.github/copilot-instructions.md`, `.github/instructions/**`, `.github/prompts/**`, `.github/copilot/mcp.json`, `.vscode/mcp.json` | `CLAUDE.md`, `.claude/**`, `.cursorrules`, `.cursor/**`, `.windsurfrules` |
+| Claude Code | `AGENTS.md`, `CLAUDE.md`, `.claude/**`, `.mcp.json` | `.github/copilot-instructions.md`, `.github/instructions/**`, `.github/prompts/**`, `.github/copilot/**`, `.vscode/mcp.json`, `.cursorrules`, `.cursor/**`, `.windsurfrules` |
+| Cursor | `AGENTS.md`, `.cursorrules`, `.cursor/**` | `CLAUDE.md`, `.claude/**`, `.github/copilot-instructions.md`, `.github/instructions/**`, `.github/prompts/**`, `.windsurfrules` |
+| Windsurf | `AGENTS.md`, `.windsurfrules` | `CLAUDE.md`, `.claude/**`, `.github/copilot-instructions.md`, `.github/instructions/**`, `.github/prompts/**`, `.cursorrules`, `.cursor/**` |
+
+For a tool-scoped scan, do not read, score, list, or recommend missing files from the Exclude column. For example, a GitHub Copilot scan must not count `CLAUDE.md` as present, absent, too long, contradictory, or missing a cross-reference.
+
 ### Primary Agent Instruction Files
 
 | File | Platform | Expected Location |
@@ -59,6 +70,8 @@ Scoring:
 ### 4. Claude Code Ecosystem (20% of category score)
 Check for advanced Claude Code configuration that improves agent effectiveness:
 
+This criterion applies only to cross-platform scans and Claude Code scans. For GitHub Copilot, Cursor, or Windsurf scans, mark this criterion N/A and reweight the remaining Agent Config Files criteria proportionally.
+
 - **`.claude/settings.json`**: Project settings committed for team sharing
 - **`.claude/rules/*.md`**: Scoped rules with `paths:` frontmatter for lazy-loading
 - **`.claude/skills/`**: Reusable skills defined as SKILL.md files
@@ -84,6 +97,8 @@ Files to check:
 - `.cursor/mcp.json` (Cursor)
 - `.github/copilot/mcp.json` (GitHub Copilot)
 
+For tool-scoped scans, only check MCP files relevant to the target platform.
+
 Scoring:
 - **Pass (+10)**: MCP config exists with at least one relevant server properly configured (valid transport, env vars for secrets)
 - **Partial (+5)**: MCP config exists but servers are incomplete, irrelevant, or excessive (>8 for a simple project)
@@ -100,11 +115,14 @@ Detect which platforms are in use and report in findings:
 
 Report as: "Detected platforms: Claude Code, GitHub Copilot" (informational, helps contextualize missing files).
 
+For tool-scoped scans, also report: "Target platform: GitHub Copilot" (or the requested platform) and separate it from any other detected platforms. Detected non-target platforms are informational only and must not create findings.
+
 ## How to Evaluate
 
-1. Use file search to check for each file in the expected location
-2. Read found files and assess word count (excluding code blocks for word count)
-3. Evaluate whether content covers the key sections listed above
-4. Check for Claude Code ecosystem files and their quality
-5. Detect platforms in use for contextual reporting
-6. Calculate category score using the weights above
+1. Apply the target platform filter from the main skill
+2. Use file search to check for each in-scope file in the expected location
+3. Read found in-scope files and assess word count (excluding code blocks for word count)
+4. Evaluate whether in-scope content covers the key sections listed above
+5. Check platform ecosystem files only when they are in scope for the target platform
+6. Detect platforms in use for contextual reporting
+7. Calculate category score using the weights above, reweighting criteria marked N/A
