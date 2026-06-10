@@ -13,13 +13,12 @@
 
 | Category | Weight | Key |
 |----------|--------|-----|
-| Agent Config Files | 20% | agent-configs |
-| Instruction Quality | 20% | instruction-quality |
-| MCP Server Setup | 15% | mcp-setup |
-| Custom Skills/Commands | 15% | custom-skills |
-| Security & Git Hygiene | 15% | security |
-| Repository Structure | 8% | repo-structure |
-| CI/CD Integration | 7% | ci-cd |
+| Agent Config Files | 25% | agent-configs |
+| Instruction Quality | 25% | instruction-quality |
+| Security & Git Hygiene | 20% | security |
+| Repository Structure | 10% | repo-structure |
+| CI/CD Integration | 10% | ci-cd |
+| Development Workflow | 10% | development-workflow |
 
 ## Scoring Granularity
 
@@ -38,6 +37,7 @@ When only some categories are selected, re-weight the selected categories propor
 
 ## Contextual Scoring Notes
 
-- **MCP and Custom Skills**: If a project is simple enough that these don't apply, note this context and give a neutral score (50) rather than penalizing with 0.
+- **Agent Config Files**: MCP configuration is scored as an informational bonus (+10 max). Projects without MCP are not penalized.
+- **Instruction Quality**: Custom skills/commands are scored as an informational bonus (+10 max). Projects without custom skills are not penalized.
 - **Security**: If no `.claude/` directory exists, score only the secrets and sensitive files criteria (gitignore checks become N/A).
 - **Instruction Quality**: Depends on Agent Config Files — if no config files exist, this category automatically scores 0.

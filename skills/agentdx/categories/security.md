@@ -22,6 +22,11 @@ Patterns to scan for in tracked files:
 - Connection strings with embedded passwords: `://user:pass@`
 - Private keys: `-----BEGIN (RSA |EC )?PRIVATE KEY-----`
 
+**Also scan MCP config files** (`.mcp.json`, `.vscode/mcp.json`, `.cursor/mcp.json`) for:
+- Literal API keys or tokens in server args/env fields (should be `${ENV_VAR}` references)
+- Connection strings with embedded passwords
+- HTTP URLs where HTTPS should be used for remote servers
+
 Note: Exclude false positives in documentation, examples, and test fixtures that use obviously fake values.
 
 ### 2. Agent File Gitignore (30% of category score)
@@ -76,8 +81,9 @@ Things to check:
 2. Scan for common secret patterns in tracked files (focus on config files, not all source)
 3. If `.claude/settings.json` exists, check permission rules
 4. Look for sensitive file types committed to the repository
-5. Cross-reference with agent instruction files for documented exclusions
-6. Calculate category score using the weights above
+5. Scan MCP config files for hardcoded secrets (see criterion 1 patterns)
+6. Cross-reference with agent instruction files for documented exclusions
+7. Calculate category score using the weights above
 
 ## Important Notes
 

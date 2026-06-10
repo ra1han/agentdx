@@ -75,7 +75,23 @@ Additional checks for this criterion:
 - If `.claude/settings.json` exists, verify `.claude/settings.local.json` is in `.gitignore`
 - If project has multiple domains (frontend + backend), suggest splitting rules by path
 
-### 5. Platform Detection (Informational — not scored)
+### 5. MCP Server Configuration (Informational bonus — up to +10 points)
+Check whether MCP (Model Context Protocol) servers are configured to extend agent capabilities.
+
+Files to check:
+- `.mcp.json` (Claude Code)
+- `.vscode/mcp.json` (VS Code / Copilot)
+- `.cursor/mcp.json` (Cursor)
+- `.github/copilot/mcp.json` (GitHub Copilot)
+
+Scoring:
+- **Pass (+10)**: MCP config exists with at least one relevant server properly configured (valid transport, env vars for secrets)
+- **Partial (+5)**: MCP config exists but servers are incomplete, irrelevant, or excessive (>8 for a simple project)
+- **N/A (+0)**: No MCP config — acceptable for simple projects, no penalty
+
+Note: MCP is relatively new. Not every project needs it. Do not penalize absence — only reward presence.
+
+### 6. Platform Detection (Informational — not scored)
 Detect which platforms are in use and report in findings:
 - Check for `.github/workflows/` → GitHub Copilot likely in use
 - Check for `.cursor/` directory → Cursor in use

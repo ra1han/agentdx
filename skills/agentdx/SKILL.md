@@ -1,6 +1,6 @@
 ---
 name: agentdx
-description: "Assess repository agentic engineering readiness. Scores agent config files, instruction quality, MCP setup, custom skills, repo structure, and CI/CD integration (0-100)."
+description: "Assess repository agentic engineering readiness. Scores agent configs, instruction quality, security, repo structure, CI/CD, and development workflow (0-100)."
 ---
 
 # AgentDX: Agentic Engineering Readiness Assessment
@@ -22,11 +22,10 @@ Ask the user (or infer from their request) which categories to scan:
 Available categories:
 1. Agent Config Files
 2. Instruction Quality
-3. MCP Server Setup
-4. Custom Skills/Commands
-5. Security & Git Hygiene
-6. Repository Structure
-7. CI/CD Integration
+3. Security & Git Hygiene
+4. Repository Structure
+5. CI/CD Integration
+6. Development Workflow
 
 ### 2. Load Rubric
 
@@ -40,11 +39,10 @@ For each selected category, read the corresponding category file and evaluate th
 |----------|------|
 | Agent Config Files | `skills/agentdx/categories/agent-configs.md` |
 | Instruction Quality | `skills/agentdx/categories/instruction-quality.md` |
-| MCP Server Setup | `skills/agentdx/categories/mcp-setup.md` |
-| Custom Skills/Commands | `skills/agentdx/categories/custom-skills.md` |
 | Security & Git Hygiene | `skills/agentdx/categories/security.md` |
 | Repository Structure | `skills/agentdx/categories/repo-structure.md` |
 | CI/CD Integration | `skills/agentdx/categories/ci-cd.md` |
+| Development Workflow | `skills/agentdx/categories/development-workflow.md` |
 
 For each category:
 1. Read the category file to understand what to check and how to score
@@ -90,7 +88,7 @@ Suggest the user add `.agentdx/` to `.gitignore` if they don't want reports comm
 
 - This is an assessment tool. Do NOT offer to fix issues unless the user explicitly asks.
 - Be fair in scoring: not every project needs every feature. Context matters.
-- For MCP and Custom Skills categories: if a project is simple enough that these don't apply, note this and give a neutral score (50) rather than penalizing.
+- MCP and custom skills are scored as bonuses within Agent Config Files and Instruction Quality — their absence does not penalize.
 - Instruction Quality depends on Agent Config Files — if no config files exist, Instruction Quality automatically scores 0.
 - Security: if no `.claude/` directory exists, only score secrets and sensitive files criteria.
 - Be specific in findings. "Missing X" is better than "could be improved."

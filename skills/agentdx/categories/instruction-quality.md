@@ -76,12 +76,32 @@ If multiple config files exist, do they contradict each other?
 - **Minor**: Different terminology for same concept (deduct 5 points)
 - **Major**: Direct contradictions (e.g., one file says "use tabs" another says "use spaces") (deduct 10 points)
 
+### 7. Skill & Command Quality (Bonus — up to +10 points)
+If the repository defines custom skills, commands, or prompt templates, assess their quality.
+
+Locations to check:
+- `skills/` or `.claude/skills/` — SKILL.md files
+- `commands/` or `.claude/commands/` — command files
+- `.copilot/` or `.github/copilot/` — Copilot customizations
+- `prompts/` or `.prompts/` — prompt templates
+
+Scoring:
+- **+10**: Skills exist with YAML frontmatter (`description` field), clear purpose, project-specific workflows (not generic), and are referenced from instruction files or have clear auto-invocation triggers
+- **+5**: Skills exist but lack frontmatter, are generic ("write a test"), are orphaned (unreferenced), or are excessively long (>300 lines)
+- **+0**: No custom skills/commands — acceptable, no penalty
+
+Additional checks:
+- Skills with no `description` frontmatter AND no references from instruction files are undiscoverable — flag these
+- Skills >300 lines: suggest splitting or moving reference content to docs
+- Generic skills that duplicate agent built-in capabilities add noise — flag these
+
 ## How to Evaluate
 
 1. Read all agent config files found in the repository
 2. For each criterion, evaluate across ALL config files (not just one)
 3. Count lines and detect structural elements (headings, code blocks, references)
 4. Check cross-file coherence (do files reference each other, or duplicate/contradict?)
-5. Use your judgment as an experienced developer: would these instructions actually help you work in this codebase?
-6. Calculate category score: sum criteria 1–5 (each 20%), then apply consistency penalty if applicable
-7. Cap final score at 0 minimum (consistency penalty cannot make score negative)
+5. Search for custom skills/commands and assess quality if present
+6. Use your judgment as an experienced developer: would these instructions actually help you work in this codebase?
+7. Calculate category score: sum criteria 1–5 (each 20%), then apply consistency penalty and skill bonus
+8. Cap final score at 0 minimum (consistency penalty cannot make score negative); cap at 100 maximum
