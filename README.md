@@ -2,7 +2,7 @@
 
 Assess how well your repository is set up for agentic engineering workflows. Get a score (0–100) with actionable findings and recommendations.
 
-AgentDX is a skill-based plugin that runs inside GitHub Copilot and Claude Code sessions — no external tools or dependencies required.
+AgentDX is a skill-based plugin that runs inside GitHub Copilot, Claude Code, and OpenAI Codex sessions — no external tools or dependencies required.
 
 ## What It Checks
 
@@ -85,14 +85,14 @@ AgentDX produces a scored report with per-category findings:
 - ✅ `.github/copilot-instructions.md` exists and is substantive
 - ✅ `.claude/settings.json` committed with proper permissions
 - ⚠️ `CLAUDE.md` present but over 400 lines — consider trimming
-- ❌ No `.cursorrules` file found
+- ❌ No `AGENTS.md` file found for shared agent instructions
 
 ### Detected Platforms
 Active agent platforms: Claude Code, GitHub Copilot
 
 ### Top 3 Recommendations
 1. Trim CLAUDE.md to <200 lines, move details to .claude/rules/ (+8 points)
-2. Add .cursorrules for Cursor users (+5 points)
+2. Add AGENTS.md for shared Claude/Copilot/Codex guidance (+5 points)
 3. Create .mcp.json with project-relevant servers (+4 points)
 ```
 
@@ -100,17 +100,23 @@ Active agent platforms: Claude Code, GitHub Copilot
 
 ### GitHub Copilot CLI
 
-**Add the marketplace and install the plugin:**
-
-```bash
-copilot plugin marketplace add ra1han/agentdx
-copilot plugin install agentdx
-```
-
-**Or install directly from the repository:**
+**Install directly from GitHub:**
 
 ```bash
 copilot plugin install ra1han/agentdx
+```
+
+**Or add the marketplace and install from it:**
+
+```bash
+copilot plugin marketplace add ra1han/agentdx
+copilot plugin install agentdx@agentdx
+```
+
+**Update:**
+
+```bash
+copilot plugin update agentdx
 ```
 
 ### OpenAI Codex
@@ -119,6 +125,13 @@ copilot plugin install ra1han/agentdx
 
 ```bash
 codex plugin marketplace add ra1han/agentdx
+codex plugin install agentdx@agentdx
+```
+
+**Update:**
+
+```bash
+codex plugin update agentdx
 ```
 
 **Or load directly during development:**
@@ -129,11 +142,17 @@ codex --plugin-dir ./agentdx
 
 ### Claude Code
 
-**Install from a marketplace (if added):**
+**Add the marketplace and install from it:**
 
 ```bash
-/plugin marketplace add ra1han/agentdx
-/plugin install agentdx
+claude plugin marketplace add ra1han/agentdx
+claude plugin install agentdx@agentdx
+```
+
+**Update:**
+
+```bash
+claude plugin update agentdx
 ```
 
 **Or load directly during development:**

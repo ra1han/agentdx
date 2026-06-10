@@ -67,7 +67,7 @@ Is the file well-organized with clear navigation and proper linking?
 Additional checks:
 - Look for heading patterns: `## Project`, `## Commands`, `## Stack`, `## Architecture`
 - Detect `@FILENAME` references or markdown links to other repo docs
-- If both `CLAUDE.md` and `AGENTS.md` exist in a cross-platform or Claude scan, check that one references the other (e.g., `@AGENTS.md` or `[AGENTS.md](./AGENTS.md)`). Do not apply this check in Copilot, Cursor, or Windsurf scans when `CLAUDE.md` is outside the target platform scope.
+- If both `CLAUDE.md` and `AGENTS.md` exist in a cross-platform or Claude scan, check that one references the other (e.g., `@AGENTS.md` or `[AGENTS.md](./AGENTS.md)`). Do not apply this check in Copilot or Codex scans when `CLAUDE.md` is outside the target platform scope.
 - If repo has `docs/` folder but instruction files never link to it, suggest adding pointers
 - Detect the "table-of-contents approach": short root file linking to scoped rules/skills
 

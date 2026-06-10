@@ -1,6 +1,6 @@
 ---
 name: agentdx
-description: "Assess repository agentic engineering readiness. Scores agent configs, instruction quality, security, repo structure, CI/CD, and development workflow (0-100). Supports tool-scoped scans for Copilot, Claude, Cursor, and Windsurf."
+description: "Assess repository agentic engineering readiness. Scores agent configs, instruction quality, security, repo structure, CI/CD, and development workflow (0-100). Supports tool-scoped scans for Copilot, Claude, and Codex."
 ---
 
 # AgentDX: Agentic Engineering Readiness Assessment
@@ -22,13 +22,12 @@ Ask the user (or infer from their request) which categories to scan:
 Also infer whether the request names a target tool/platform. Examples:
 - "run agentdx scan for copilot" → target platform: GitHub Copilot
 - "scan for claude" or "claude code readiness" → target platform: Claude Code
-- "scan for cursor" → target platform: Cursor
-- "scan for windsurf" → target platform: Windsurf
+- "scan for codex" or "codex readiness" → target platform: OpenAI Codex
 
 If no tool/platform is named, run a cross-platform scan. If a tool/platform is named, run a tool-scoped scan:
 - Evaluate only issues relevant to that platform plus universal repository hygiene.
 - Include universal/shared files such as `AGENTS.md`, `README.md`, `docs/`, CI, and general secret hygiene when the category uses them.
-- Exclude non-target platform files from scoring, findings, and recommendations. For example, a Copilot scan MUST NOT inspect or penalize `CLAUDE.md`, `.claude/**`, `.cursorrules`, or `.windsurfrules`; a Claude scan MUST NOT penalize missing `.github/copilot-instructions.md`, `.github/instructions/**`, `.cursorrules`, or `.windsurfrules`.
+- Exclude non-target platform files from scoring, findings, and recommendations. For example, a Copilot scan MUST NOT inspect or penalize `CLAUDE.md`, `.claude/**`, `.codex-plugin/**`, or `.agents/**`; a Claude scan MUST NOT penalize missing `.github/copilot-instructions.md`, `.github/instructions/**`, `.codex-plugin/**`, or `.agents/**`; a Codex scan MUST NOT penalize missing `CLAUDE.md`, `.claude/**`, `.github/copilot-instructions.md`, or `.github/instructions/**`.
 - Do not mention missing files for non-target platforms in the top recommendations.
 
 Available categories:

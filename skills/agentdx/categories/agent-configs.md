@@ -9,10 +9,9 @@ When the main skill specifies a target platform, filter this list before scoring
 
 | Target Platform | Include | Exclude |
 |-----------------|---------|---------|
-| GitHub Copilot | `AGENTS.md`, `.github/copilot-instructions.md`, `.github/instructions/**`, `.github/prompts/**`, `.github/copilot/mcp.json`, `.vscode/mcp.json` | `CLAUDE.md`, `.claude/**`, `.cursorrules`, `.cursor/**`, `.windsurfrules` |
-| Claude Code | `AGENTS.md`, `CLAUDE.md`, `.claude/**`, `.mcp.json` | `.github/copilot-instructions.md`, `.github/instructions/**`, `.github/prompts/**`, `.github/copilot/**`, `.vscode/mcp.json`, `.cursorrules`, `.cursor/**`, `.windsurfrules` |
-| Cursor | `AGENTS.md`, `.cursorrules`, `.cursor/**` | `CLAUDE.md`, `.claude/**`, `.github/copilot-instructions.md`, `.github/instructions/**`, `.github/prompts/**`, `.windsurfrules` |
-| Windsurf | `AGENTS.md`, `.windsurfrules` | `CLAUDE.md`, `.claude/**`, `.github/copilot-instructions.md`, `.github/instructions/**`, `.github/prompts/**`, `.cursorrules`, `.cursor/**` |
+| GitHub Copilot | `AGENTS.md`, `.github/copilot-instructions.md`, `.github/instructions/**`, `.github/prompts/**`, `.github/copilot/mcp.json`, `.vscode/mcp.json` | `CLAUDE.md`, `.claude/**`, `.codex-plugin/**`, `.agents/**` |
+| Claude Code | `AGENTS.md`, `CLAUDE.md`, `.claude/**`, `.mcp.json` | `.github/copilot-instructions.md`, `.github/instructions/**`, `.github/prompts/**`, `.github/copilot/**`, `.vscode/mcp.json`, `.codex-plugin/**`, `.agents/**` |
+| OpenAI Codex | `AGENTS.md`, `.codex-plugin/**`, `.agents/**` | `CLAUDE.md`, `.claude/**`, `.github/copilot-instructions.md`, `.github/instructions/**`, `.github/prompts/**`, `.github/copilot/**`, `.vscode/mcp.json` |
 
 For a tool-scoped scan, do not read, score, list, or recommend missing files from the Exclude column. For example, a GitHub Copilot scan must not count `CLAUDE.md` as present, absent, too long, contradictory, or missing a cross-reference.
 
@@ -23,8 +22,7 @@ For a tool-scoped scan, do not read, score, list, or recommend missing files fro
 | `AGENTS.md` | Universal | Repository root |
 | `.github/copilot-instructions.md` | GitHub Copilot | `.github/` directory |
 | `CLAUDE.md` | Claude Code | Repository root |
-| `.cursorrules` | Cursor | Repository root |
-| `.windsurfrules` | Windsurf | Repository root |
+| `.codex-plugin/plugin.json` | OpenAI Codex | `.codex-plugin/` directory |
 
 ### Claude Code Ecosystem Files
 
@@ -47,7 +45,7 @@ For each primary instruction file, check if it exists in the expected location.
 
 Score: (files found / 5) × 100. Award partial credit (half) for mislocated files.
 
-Note: Not every project needs all 5 files. Award full marks if at least 2 platform-specific files exist AND they cover the platforms the project actually uses (check for platform indicators like `.github/workflows/` for Copilot, existence of other `.cursor/` files for Cursor, etc.).
+Note: Not every project needs every platform file. Award full marks if at least 2 platform-specific files exist AND they cover the platforms the project actually uses (check for platform indicators like `.github/workflows/` for Copilot, `.claude/` for Claude Code, or `.codex-plugin/` for Codex).
 
 ### 2. Minimum Substance (25% of category score)
 For each found file, verify it has meaningful content:
@@ -70,7 +68,7 @@ Scoring:
 ### 4. Claude Code Ecosystem (20% of category score)
 Check for advanced Claude Code configuration that improves agent effectiveness:
 
-This criterion applies only to cross-platform scans and Claude Code scans. For GitHub Copilot, Cursor, or Windsurf scans, mark this criterion N/A and reweight the remaining Agent Config Files criteria proportionally.
+This criterion applies only to cross-platform scans and Claude Code scans. For GitHub Copilot or OpenAI Codex scans, mark this criterion N/A and reweight the remaining Agent Config Files criteria proportionally.
 
 - **`.claude/settings.json`**: Project settings committed for team sharing
 - **`.claude/rules/*.md`**: Scoped rules with `paths:` frontmatter for lazy-loading
@@ -94,7 +92,6 @@ Check whether MCP (Model Context Protocol) servers are configured to extend agen
 Files to check:
 - `.mcp.json` (Claude Code)
 - `.vscode/mcp.json` (VS Code / Copilot)
-- `.cursor/mcp.json` (Cursor)
 - `.github/copilot/mcp.json` (GitHub Copilot)
 
 For tool-scoped scans, only check MCP files relevant to the target platform.
@@ -109,9 +106,8 @@ Note: MCP is relatively new. Not every project needs it. Do not penalize absence
 ### 6. Platform Detection (Informational — not scored)
 Detect which platforms are in use and report in findings:
 - Check for `.github/workflows/` → GitHub Copilot likely in use
-- Check for `.cursor/` directory → Cursor in use
 - Check for `CLAUDE.md` or `.claude/` → Claude Code in use
-- Check for `.windsurfrules` → Windsurf in use
+- Check for `.codex-plugin/` or `.agents/plugins/` → OpenAI Codex likely in use
 
 Report as: "Detected platforms: Claude Code, GitHub Copilot" (informational, helps contextualize missing files).
 

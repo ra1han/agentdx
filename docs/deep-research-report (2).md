@@ -15,7 +15,7 @@ At a high level you want to cover five surfaces that matter for Claude Code and 
 - Project instructions: `CLAUDE.md`, `AGENTS.md`, `*.md` instruction files.
 - Claude config: `.claude/settings.json`, `.claude/settings.local.json`, `.claude/rules/**`, `.claude/skills/**`, `.claude/agents/**`.[^3][^4][^2]
 - MCP servers: `.mcp.json` or similar MCP config for external tools.[^5][^6][^7]
-- Cross-agent configs: `.github/copilot-instructions.md`, `.cursorrules`, `opencode.json`, etc., to keep repo agent-agnostic.[^4]
+- Cross-agent configs: `AGENTS.md`, `.github/copilot-instructions.md`, `CLAUDE.md`, and Codex plugin metadata to keep repo agent-agnostic.[^4]
 - Git hygiene around agent files: what’s committed vs gitignored (`.claude/settings.json` vs `settings.local.json`, memory dirs, etc.).[^8][^4]
 
 Your plugin can walk the repo, detect which of these exist, and then grade each dimension (e.g. 0–5) plus recommended changes.
@@ -42,7 +42,7 @@ Context files like `AGENTS.md` (OpenAI/AGENTS ecosystem) and `.github/copilot-in
 
 ### Checks your plugin can run
 
-For each of `CLAUDE.md`, `AGENTS.md`, `.github/copilot-instructions.md`, `.cursorrules`, etc., do:
+For each of `CLAUDE.md`, `AGENTS.md`, `.github/copilot-instructions.md`, Codex plugin metadata, etc., do:
 
 1. **Existence \& placement**
     - If no `CLAUDE.md` at project root → warn and suggest creating one with minimal template.[^9][^10]
@@ -146,18 +146,18 @@ Your plugin doesn’t need to fully understand server code; just reading the con
 
 ***
 
-## Cross‑agent friendliness (Copilot, Cursor, OpenCode, etc.)
+## Cross-agent friendliness (Copilot, Claude, Codex)
 
 Teams often use multiple coding agents, which introduces a zoo of config files. A “friendly” repo:[^4]
 
 - Has both `CLAUDE.md` and `AGENTS.md`/`.github/copilot-instructions.md` if multiple tools are used, with consistent guidance.[^14][^4]
 - Uses a shared philosophy/structure but tool‑specific files just adapt the syntax.[^15][^4]
-- Commits team-shared configs (e.g. `.github/copilot-instructions.md`, `.cursorrules`) and ignores local state.[^22][^23][^4]
+- Commits team-shared configs (e.g. `AGENTS.md`, `.github/copilot-instructions.md`, `CLAUDE.md`) and ignores local state.[^22][^23][^4]
 
 Your plugin can:
 
 - Detect presence of these files and report:
-    - “You’re using Claude only,” “Claude + Copilot”, “Claude + Cursor”, etc., based on which files exist.[^23][^24][^22][^4]
+    - “You’re using Claude only,” “Claude + Copilot”, “Claude + Codex”, etc., based on which files exist.[^23][^24][^22][^4]
     - Inconsistent or missing cross‑references (e.g. repo has `AGENTS.md` but `CLAUDE.md` never mentions it; recommend `@AGENTS.md`.)[^15][^4]
 - Optionally suggest adopting the convention table seen in reference material so humans (and tools) know what config is for which agent.[^4]
 
@@ -249,7 +249,7 @@ repo/
   .mcp.json               # if applicable
   .github/
     copilot-instructions.md
-  .cursorrules
+    .codex-plugin/
 ```
 
 Typical UX:
@@ -308,7 +308,7 @@ This gives you an opinionated, automatable checklist grounded in current best pr
 
 [^19]: https://github.com/ZacheryGlass/.claude/blob/master/settings.json
 
-[^20]: https://www.firecrawl.dev/blog/best-mcp-servers-for-cursor
+[^20]: https://github.com/modelcontextprotocol/servers
 
 [^21]: https://github.com/lirantal/awesome-mcp-best-practices/issues
 

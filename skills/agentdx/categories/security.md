@@ -24,7 +24,7 @@ Patterns to scan for in tracked files:
 - Connection strings with embedded passwords: `://user:pass@`
 - Private keys: `-----BEGIN (RSA |EC )?PRIVATE KEY-----`
 
-**Also scan MCP config files** (`.mcp.json`, `.vscode/mcp.json`, `.cursor/mcp.json`) for:
+**Also scan MCP config files** (`.mcp.json`, `.vscode/mcp.json`, `.github/copilot/mcp.json`) for:
 - Literal API keys or tokens in server args/env fields (should be `${ENV_VAR}` references)
 - Connection strings with embedded passwords
 - HTTP URLs where HTTPS should be used for remote servers
@@ -68,7 +68,7 @@ Where to check:
 - Look for `allow` rules with wildcards on destructive commands
 - Flag: `git push`, `git force-push`, `rm -rf`, `DROP TABLE`, `kubectl delete`
 
-This criterion applies to Claude Code scans and cross-platform scans. For GitHub Copilot, Cursor, or Windsurf scans, mark it N/A unless an in-scope platform config exposes comparable permission rules.
+This criterion applies to Claude Code scans and cross-platform scans. For GitHub Copilot or OpenAI Codex scans, mark it N/A unless an in-scope platform config exposes comparable permission rules.
 
 ### 4. Sensitive Files Excluded from Agent Context (20% of category score)
 Are sensitive directories/files excluded from agent access or clearly marked?
