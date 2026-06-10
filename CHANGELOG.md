@@ -14,12 +14,12 @@ All notable changes to AgentDX will be documented in this file.
 ### Enhanced
 - **Agent Config Files** — added Claude Code ecosystem criterion (settings, rules, skills, agents, hooks); added platform detection
 - **Instruction Quality** — added Brevity & Focus criterion (line limits, bloat detection); added Structure & Cross-References criterion (heading detection, `@FILENAME` references, cross-file linking)
-- **MCP Server Setup** — added Server Relevance & Hygiene criterion; added Security & Configuration Quality criterion (hardcoded secrets, HTTPS, wildcard detection)
-- **Custom Skills/Commands** — added YAML frontmatter validation; skill length limits; unreferenced skills detection
+- **MCP bonus checks** — added Server Relevance & Hygiene checks and Security & Configuration Quality checks (hardcoded secrets, HTTPS, wildcard detection) inside Agent Config Files
+- **Custom Skills/Commands bonus checks** — added YAML frontmatter validation, skill length limits, and unreferenced skills detection inside Instruction Quality
 - **Report format** — added platform detection section; estimated score improvement in recommendations; JSON output schema
 
 ### Changed
-- Rebalanced category weights: Agent Config (25%→20%), Instruction Quality (25%→20%), Security (new, 15%), Repo Structure (10%→8%), CI/CD (10%→7%)
+- Rebalanced category weights: Agent Config (25%), Instruction Quality (25%), Security & Git Hygiene (20%), Repo Structure (10%), CI/CD Integration (10%), Development Workflow (10%)
 - Instruction Quality consistency check changed from 25% criterion to bonus/penalty system (deduct up to 10 points)
 
 ## [1.0.0] - 2026-06-05

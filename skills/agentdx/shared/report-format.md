@@ -72,11 +72,10 @@ The JSON report is always saved to `.agentdx/report.json`. It is also displayed 
   "categories": {
     "agent-configs": { "score": 85, "status": "pass", "findings": [...] },
     "instruction-quality": { "score": 70, "status": "warning", "findings": [...] },
-    "mcp-setup": { "score": 50, "status": "warning", "findings": [...] },
-    "custom-skills": { "score": 60, "status": "warning", "findings": [...] },
     "security": { "score": 90, "status": "pass", "findings": [...] },
     "repo-structure": { "score": 75, "status": "warning", "findings": [...] },
-    "ci-cd": { "score": 65, "status": "warning", "findings": [...] }
+    "ci-cd": { "score": 65, "status": "warning", "findings": [...] },
+    "development-workflow": { "score": 60, "status": "warning", "findings": [...] }
   },
   "platforms_detected": ["Claude Code", "GitHub Copilot"],
   "recommendations": [

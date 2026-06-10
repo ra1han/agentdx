@@ -8,13 +8,14 @@ AgentDX is a skill-based plugin that runs inside GitHub Copilot and Claude Code 
 
 | Category | Weight | What It Evaluates |
 |----------|--------|-------------------|
-| Agent Config Files | 20% | Presence of AGENTS.md, copilot-instructions, CLAUDE.md, .claude/ ecosystem files |
-| Instruction Quality | 20% | Specificity, actionability, brevity, structure, and cross-references |
-| MCP Server Setup | 15% | MCP configuration, server relevance, and security |
-| Custom Skills/Commands | 15% | Project-specific skills, structure quality, and discoverability |
-| Security & Git Hygiene | 15% | Secrets detection, gitignore patterns, dangerous permissions |
-| Repository Structure | 8% | README quality, docs, folder organization |
-| CI/CD Integration | 7% | Documented build/test/lint commands for agents |
+| Agent Config Files | 25% | Presence of AGENTS.md, copilot-instructions, CLAUDE.md, .claude/ ecosystem files, plus optional MCP bonus |
+| Instruction Quality | 25% | Specificity, actionability, completeness, brevity, structure, cross-references, plus optional custom skills bonus |
+| Security & Git Hygiene | 20% | Secrets detection, gitignore patterns, dangerous permissions, sensitive file exposure |
+| Repository Structure | 10% | README quality, contributing guidance, docs, folder organization |
+| CI/CD Integration | 10% | Documented build/test/lint commands, workflow files, discoverable scripts |
+| Development Workflow | 10% | Branch naming, commit standards, PR process, git hooks and automation |
+
+MCP server setup and custom skills/commands are evaluated as bonuses inside Agent Config Files and Instruction Quality. Their absence is not penalized for repositories that do not need them.
 
 ## Usage
 
@@ -25,8 +26,8 @@ AgentDX provides two modes of operation:
 | | **agentdx skill** | **agentdx-fix agent** |
 |--|-------------------|----------------------|
 | **Purpose** | Assess and score your repo | Assess, then fix issues |
-| **Mode** | Read-only audit | Interactive remediation |
-| **Output** | Score report with findings | Report + generated/fixed files |
+| **Mode** | Assessment + report files | Interactive remediation |
+| **Output** | Score report in chat + `.agentdx/report.md` and `.agentdx/report.json` | Report + generated/fixed files |
 | **Use when** | You want a quick health check | You want guided fixes applied |
 | **Invocation** | `/agentdx:agentdx` or natural language | `/agents` → agentdx-fix |
 
@@ -39,7 +40,7 @@ Note: The agentdx-fix agent is Claude Code only. On Copilot CLI, the skill provi
 
 ### Claude Code
 
-**Run a scan (skill — read-only):**
+**Run a scan (skill — assessment + report files):**
 > "Run an agentdx scan"
 
 **Diagnose and fix (agent — interactive):**
@@ -69,11 +70,10 @@ AgentDX produces a scored report with per-category findings:
 |-----------------------|-------|--------|
 | Agent Config Files    | 85    | ✅     |
 | Instruction Quality   | 70    | ⚠️     |
-| MCP Server Setup      | 50    | ⚠️     |
-| Custom Skills         | 60    | ⚠️     |
 | Security & Git Hygiene| 90    | ✅     |
 | Repository Structure  | 75    | ⚠️     |
 | CI/CD Integration     | 65    | ⚠️     |
+| Development Workflow  | 60    | ⚠️     |
 
 ### Findings
 #### Agent Config Files (85/100)
