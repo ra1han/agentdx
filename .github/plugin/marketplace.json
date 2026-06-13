@@ -6,13 +6,13 @@
   },
   "metadata": {
     "description": "Marketplace for agentdx - assess repository agentic engineering readiness",
-    "version": "1.1.0"
+    "version": "1.2.0"
   },
   "plugins": [
     {
       "name": "agentdx",
-      "description": "Assess repository agentic engineering readiness. Scores agent configs, instruction quality, security, repo structure, CI/CD, and development workflow.",
-      "version": "1.1.0",
+      "description": "Assess repository agentic engineering readiness. Scores agent configs, setup, CI/CD, proof loops, adaptability, security, and workflow.",
+      "version": "1.2.0",
       "source": "./"
     }
   ]

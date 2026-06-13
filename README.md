@@ -1,6 +1,6 @@
 # AgentDX
 
-Assess how well your repository is set up for agentic engineering workflows. Get a score (0–100) with actionable findings and recommendations.
+Assess how well your repository is set up for agentic engineering workflows. Get a score (0-100), readiness level, proof level, confidence, actionable findings, and recommendations.
 
 AgentDX is a skill-based plugin that runs inside GitHub Copilot, Claude Code, and OpenAI Codex sessions — no external tools or dependencies required.
 
@@ -8,14 +8,25 @@ AgentDX is a skill-based plugin that runs inside GitHub Copilot, Claude Code, an
 
 | Category | Weight | What It Evaluates |
 |----------|--------|-------------------|
-| Agent Config Files | 25% | Presence of AGENTS.md, copilot-instructions, CLAUDE.md, .claude/ ecosystem files, plus optional MCP bonus |
-| Instruction Quality | 25% | Specificity, actionability, completeness, brevity, structure, cross-references, plus optional custom skills bonus |
-| Security & Git Hygiene | 20% | Secrets detection, gitignore patterns, dangerous permissions, sensitive file exposure |
-| Repository Structure | 10% | README quality, contributing guidance, docs, folder organization |
-| CI/CD Integration | 10% | Documented build/test/lint commands, workflow files, discoverable scripts |
-| Development Workflow | 10% | Branch naming, commit standards, PR process, git hooks and automation |
+| Agent Config Files | 12% | Presence of AGENTS.md, copilot-instructions, CLAUDE.md, platform ecosystem files, plus optional MCP bonus |
+| Instruction Quality | 12% | Specificity, actionability, completeness, brevity, structure, cross-references, plus optional custom skills bonus |
+| Security & Git Hygiene | 14% | Secrets detection, gitignore patterns, dangerous permissions, sensitive file exposure |
+| Repository Structure | 8% | README quality, contributing guidance, docs, folder organization, repo map/onboarding surface |
+| CI/CD Integration | 14% | Build/test/lint/smoke/proof commands, workflow files, command tiers, local/CI equivalence |
+| Development Workflow | 8% | Branch naming, commit standards, PR process, hooks, manual-operation signals, improvement loop |
+| Setup & Environment | 10% | Env contract, runtime/tool versions, local infrastructure, setup/doctor path, external dependency pressure |
+| Proof & Feedback Loops | 14% | Fast checks, boot/health/smoke, supported interactions, observable evidence, reset/fixtures, test mechanisms |
+| Adaptability | 8% | Seams, offline testability, side-effect sinks, state/contract checks, architecture boundaries, inner-loop speed |
 
 MCP server setup and custom skills/commands are evaluated as bonuses inside Agent Config Files and Instruction Quality. Their absence is not penalized for repositories that do not need them.
+
+AgentDX also reports:
+
+- **Readiness Level (H0-H5)** — from unknown/no front door through operable, proveable, and compounding workflows
+- **Proof Level (L0-L6)** — from claim-only through static checks, runtime interaction, observable consequence, clean rerun, and production/customer evidence
+- **Confidence** — high, medium, or low based on direct file evidence and unknowns
+- **Command tiers** — bootstrap, doctor, boot, health, fast, proof, CI-equivalent, smoke, seed/reset, observe, cleanup
+- **Environment and dependency pressure** — env var names only, local substitutes, remote/secret requirements, mutation risk, and proof blockers
 
 ## Usage
 
@@ -69,6 +80,10 @@ AgentDX produces a scored report with per-category findings:
 
 ```
 ## AgentDX Score: 72/100 (Good)
+Readiness Level: H3 Operable
+Highest Proof Level: L2 Static/Build/Test
+Target Next Proof Level: L3 Runtime Interaction
+Confidence: Medium
 
 ### Category Breakdown
 | Category              | Score | Status |
@@ -79,6 +94,9 @@ AgentDX produces a scored report with per-category findings:
 | Repository Structure  | 75    | ⚠️     |
 | CI/CD Integration     | 65    | ⚠️     |
 | Development Workflow  | 60    | ⚠️     |
+| Setup & Environment   | 70    | ⚠️     |
+| Proof & Feedback Loops| 55    | ⚠️     |
+| Adaptability          | 65    | ⚠️     |
 
 ### Findings
 #### Agent Config Files (85/100)
@@ -90,10 +108,20 @@ AgentDX produces a scored report with per-category findings:
 ### Detected Platforms
 Active agent platforms: Claude Code, GitHub Copilot
 
+### Agent Proof Summary
+| Signal | Detected State |
+|--------|----------------|
+| Readiness Level | H3 — fast local validation is discoverable |
+| Highest Proof Level | L2 — lint and unit tests are available |
+| Target Next Proof Level | L3 — add a smoke/API workflow command |
+| Fast Local Feedback | `npm test` configured |
+| CI/Local Equivalence | partial |
+| Runtime Smoke Path | missing |
+
 ### Top 3 Recommendations
-1. Trim CLAUDE.md to <200 lines, move details to .claude/rules/ (+8 points)
-2. Add AGENTS.md for shared Claude/Copilot/Codex guidance (+5 points)
-3. Create .mcp.json with project-relevant servers (+4 points)
+1. Add a smoke command that boots the app and exercises one supported route (+8 points, unlocks L3)
+2. Align local `test`/`lint` commands with CI workflow checks (+6 points)
+3. Add `.env.example` with required env var names and safe local defaults (+5 points)
 ```
 
 ## Installation

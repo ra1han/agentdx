@@ -1,7 +1,7 @@
 {
   "name": "agentdx",
-  "version": "1.1.0",
-  "description": "Assess repository agentic engineering readiness. Scores agent configs, instruction quality, security, repo structure, CI/CD, and development workflow.",
+  "version": "1.2.0",
+  "description": "Assess repository agentic engineering readiness. Scores agent configs, setup, CI/CD, proof loops, adaptability, security, and workflow.",
   "author": {
     "name": "ra1han",
     "email": "ra1han@github.com",
@@ -15,7 +15,7 @@
   "interface": {
     "displayName": "AgentDX",
     "shortDescription": "Score your repo's agent-friendliness (0-100)",
-    "longDescription": "Assess how well your repository is set up for agentic engineering workflows. Scans agent config files, instruction quality, security & git hygiene, repo structure, CI/CD integration, and development workflow. MCP setup and custom skills are evaluated as optional bonuses. Produces a scored report with actionable findings and recommendations.",
+    "longDescription": "Assess how well your repository is set up for agentic engineering workflows. Scans agent config files, instruction quality, security & git hygiene, repo structure, setup and environment, CI/CD integration, development workflow, proof and feedback loops, and adaptability. Reports a score, readiness level, proof level, confidence, actionable findings, and recommendations.",
     "developerName": "ra1han",
     "category": "Productivity",
     "capabilities": ["Read"],

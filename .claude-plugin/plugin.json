@@ -1,7 +1,7 @@
 {
   "name": "agentdx",
-  "description": "Assess repository agentic engineering readiness. Scores agent configs, instruction quality, security, repo structure, CI/CD, and development workflow.",
-  "version": "1.1.0",
+  "description": "Assess repository agentic engineering readiness. Scores agent configs, setup, CI/CD, proof loops, adaptability, security, and workflow.",
+  "version": "1.2.0",
   "author": {
     "name": "ra1han",
     "url": "https://github.com/ra1han"

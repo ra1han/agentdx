@@ -40,6 +40,11 @@ When invoked:
 - Generate skill skeletons for common project workflows
 - Create or update `.mcp.json` stubs
 - Add `AGENTS.md` with cross-references to existing config
+- Add `.env.example` or setup docs with env var names only, never secret values
+- Add or document safe setup/doctor/smoke command wrappers
+- Add git hook or local command guidance that matches CI checks
+- Add fixture/fake/sink skeletons only when the user confirms the target behavior and risk
+- Add troubleshooting or known-difficulties notes that point to executable checks when possible
 
 ## Constraints
 
