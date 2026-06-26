@@ -5,12 +5,12 @@ All notable changes to AgentDX will be documented in this file.
 ## [1.2.0] - 2026-06-14
 
 ### Added
-- **Setup & Environment category** — scores env contracts, runtime/tool versions, local infrastructure, setup/doctor paths, and external dependency pressure
+- **Setup & Environment category** — scores env contracts, runtime/tool versions, local infrastructure, setup/Diagnostics paths, and external dependency pressure
 - **Proof & Feedback Loops category** — scores deterministic sensors, boot/health/smoke paths, supported interactions, observable evidence, reset/fixtures, and reusable test mechanisms
 - **Adaptability category** — scores seams, offline testability, side-effect sinks, state/contract verification, architecture boundaries, and inner-loop speed
 - **Readiness levels (H0-H5)** — report-level summary of whether a repo is unknown, has a front door, is assessed, operable, proveable, or compounding
 - **Proof levels (L0-L6)** — report-level summary of the strongest evidence a repo can provide for agent work
-- **Command tier inventory** — bootstrap, doctor, boot, health, fast, proof, CI-equivalent, smoke, seed/reset, observe, cleanup, and improvement-loop commands
+- **Command tier inventory** — bootstrap, Diagnostics, boot, health, fast, proof, CI-equivalent, smoke, seed/reset, observe, cleanup, and improvement-loop commands
 - **Environment and dependency inventories** — machine-readable report fields for env var names, local substitutes, remote/secret requirements, mutation risk, and proof blockers
 
 ### Enhanced
@@ -27,7 +27,7 @@ All notable changes to AgentDX will be documented in this file.
 
 ### Added
 - **Security & Git Hygiene category** — new category scanning for hardcoded secrets, gitignore patterns for agent files, dangerous permissions, and sensitive file exposure
-- **Setup Doctor agent** (`agents/agentdx-fix.md`) — subagent that runs the assessment and offers to fix issues
+- **Setup Diagnostics agent** (`agents/agentdx-fix.md`) — subagent that runs the assessment and offers to fix issues
 - **JSON output mode** — request machine-readable output for CI integration
 - **Platform detection** — informational reporting of which agent platforms are in use
 - **Claude Code ecosystem checks** — `.claude/settings.json`, `.claude/rules/`, `.claude/agents/`, hooks detection

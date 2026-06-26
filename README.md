@@ -14,7 +14,7 @@ AgentDX is a skill-based plugin that runs inside GitHub Copilot, Claude Code, an
 | Repository Structure | 8% | README quality, contributing guidance, docs, folder organization, repo map/onboarding surface |
 | CI/CD Integration | 14% | Build/test/lint/smoke/proof commands, workflow files, command tiers, local/CI equivalence |
 | Development Workflow | 8% | Branch naming, commit standards, PR process, hooks, manual-operation signals, improvement loop |
-| Setup & Environment | 10% | Env contract, runtime/tool versions, local infrastructure, setup/doctor path, external dependency pressure |
+| Setup & Environment | 10% | Env contract, runtime/tool versions, local infrastructure, setup/Diagnostics path, external dependency pressure |
 | Proof & Feedback Loops | 14% | Fast checks, boot/health/smoke, supported interactions, observable evidence, reset/fixtures, test mechanisms |
 | Adaptability | 8% | Seams, offline testability, side-effect sinks, state/contract checks, architecture boundaries, inner-loop speed |
 
@@ -25,7 +25,7 @@ AgentDX also reports:
 - **Readiness Level (H0-H5)** — from unknown/no front door through operable, proveable, and compounding workflows
 - **Proof Level (L0-L6)** — from claim-only through static checks, runtime interaction, observable consequence, clean rerun, and production/customer evidence
 - **Confidence** — high, medium, or low based on direct file evidence and unknowns
-- **Command tiers** — bootstrap, doctor, boot, health, fast, proof, CI-equivalent, smoke, seed/reset, observe, cleanup
+- **Command tiers** — bootstrap, Diagnostics, boot, health, fast, proof, CI-equivalent, smoke, seed/reset, observe, cleanup
 - **Environment and dependency pressure** — env var names only, local substitutes, remote/secret requirements, mutation risk, and proof blockers
 
 ## Usage

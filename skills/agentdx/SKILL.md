@@ -71,7 +71,7 @@ For each category:
 7. Record individual findings with status emojis (✅ ⚠️ ❌)
 
 Also capture cross-cutting evidence while scanning:
-- `command_tiers`: bootstrap, doctor, boot, health, fast, quick, proof, ci_equivalent, smoke, seed_or_reset, observe, cleanup, retro_or_improve
+- `command_tiers`: bootstrap, Diagnostics, boot, health, fast, quick, proof, ci_equivalent, smoke, seed_or_reset, observe, cleanup, retro_or_improve
 - `ci_local_equivalence`: identical, equivalent, partial, divergent, local_only, ci_only, unknown
 - `environment_variables`: names only, source files, required/optional/unknown, secret-like, example/default availability
 - `external_dependencies`: dependency type, local option, remote/secret requirement, mutation risk, proof blockage

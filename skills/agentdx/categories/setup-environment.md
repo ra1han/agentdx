@@ -47,11 +47,11 @@ Scoring:
 - **Partial**: Some local substitutes exist, but important services remain remote-only, secret-gated, or unclear
 - **Fail**: Meaningful setup/proof requires live remote services with no documented substitute
 
-### 4. Setup, Doctor, and Preflight Path (20% of category score)
+### 4. Setup, Diagnostics, and Preflight Path (20% of category score)
 Is there a low-risk way to check setup before booting or changing state?
 
 Look for:
-- `setup`, `bootstrap`, `doctor`, `preflight`, `config --check`, `--dry-run`, or equivalent commands
+- `setup`, `bootstrap`, `Diagnostics`, `preflight`, `config --check`, `--dry-run`, or equivalent commands
 - documented expected success/failure output
 - non-mutating validation of required tools, env vars, and local services
 

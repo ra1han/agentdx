@@ -86,7 +86,7 @@ Include this section when commands are discovered:
 | bootstrap | `{command}` | verified/configured_unverified/candidate_unverified/not_applicable/unknown | {notes} |
 ```
 
-Use these tiers when relevant: bootstrap, setup_services, doctor, boot, health, fast, quick, proof, ci_equivalent, smoke, seed_or_reset, observe, cleanup, retro_or_improve.
+Use these tiers when relevant: bootstrap, setup_services, Diagnostics, boot, health, fast, quick, proof, ci_equivalent, smoke, seed_or_reset, observe, cleanup, retro_or_improve.
 
 ## Test and Proof Mechanisms
 

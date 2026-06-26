@@ -2,7 +2,7 @@
 
 # i am building a plugin for claude code. it will help developers to find gaps in their repo and agent setup to check for agent coding friendliness. for example claude.md or agent.md file, skills, mcp servers etc. do a deep research find what things to check, how to check, how to package the plugin (skills/agents etc)
 
-You can treat this plugin as a “lint + doctor” for agentic repos: it inspects Claude/agent config, scores “agent-friendliness” across a few dimensions, and emits concrete fixes.
+You can treat this plugin as a “lint + Diagnostics” for agentic repos: it inspects Claude/agent config, scores “agent-friendliness” across a few dimensions, and emits concrete fixes.
 
 Below is a design for what to check, how to check it, and how to package it as a Claude Code skill/agent.
 
@@ -221,7 +221,7 @@ You can optionally include a tiny CLI (Python/Node) in the repo, but you can als
 
 ### Optional helper pieces
 
-- **Subagent**: `.claude/agents/setup-doctor/` that uses this skill by default and is positioned as a “Claude Doctor” for configuration.[^2][^12]
+- **Subagent**: `.claude/agents/setup-Diagnostics/` that uses this skill by default and is positioned as a “Claude Diagnostics” for configuration.[^2][^12]
 - **Hook**: a PreSession or slash command hook that suggests running the audit if the repo lacks CLAUDE.md or `.claude/settings.json`.[^12][^2]
 - **MCP server (later)**: If you want to share this beyond Claude, you could expose the same logic as an MCP server that takes a repo path and returns the JSON report; but for Claude Code usage alone, a skill + Bash is enough.[^6][^7][^5]
 
@@ -244,7 +244,7 @@ repo/
       repo-agent-linter/
         SKILL.md
     agents/
-      setup-doctor/
+      setup-Diagnostics/
         AGENT.md          # or equivalent agent descriptor
   .mcp.json               # if applicable
   .github/
@@ -254,7 +254,7 @@ repo/
 
 Typical UX:
 
-- User types `/doctor` or “run repo agent setup audit”.
+- User types `/Diagnostics` or “run repo agent setup audit”.
 - Claude invokes `repo-agent-linter` skill.
 - Skill:
     - Scans repo.
