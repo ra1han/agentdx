@@ -14,7 +14,7 @@ AgentDX is a skill-based plugin that runs inside GitHub Copilot, Claude Code, an
 | Repository Structure | 8% | README quality, contributing guidance, docs, folder organization, repo map/onboarding surface |
 | CI/CD Integration | 14% | Build/test/lint/smoke/proof commands, workflow files, command tiers, local/CI equivalence |
 | Development Workflow | 8% | Branch naming, commit standards, PR process, hooks, manual-operation signals, improvement loop |
-| Setup & Environment | 10% | Env contract, runtime/tool versions, local infrastructure, setup/Diagnostics path, external dependency pressure |
+| Setup & Environment | 10% | Env contract, runtime/tool versions, local infrastructure, setup/diagnostics path, external dependency pressure |
 | Proof & Feedback Loops | 14% | Fast checks, boot/health/smoke, supported interactions, observable evidence, reset/fixtures, test mechanisms |
 | Adaptability | 8% | Seams, offline testability, side-effect sinks, state/contract checks, architecture boundaries, inner-loop speed |
 
@@ -25,7 +25,7 @@ AgentDX also reports:
 - **Readiness Level (H0-H5)** — from unknown/no front door through operable, proveable, and compounding workflows
 - **Proof Level (L0-L6)** — from claim-only through static checks, runtime interaction, observable consequence, clean rerun, and production/customer evidence
 - **Confidence** — high, medium, or low based on direct file evidence and unknowns
-- **Command tiers** — bootstrap, Diagnostics, boot, health, fast, proof, CI-equivalent, smoke, seed/reset, observe, cleanup
+- **Command tiers** — bootstrap, diagnostics, boot, health, fast, proof, CI-equivalent, smoke, seed/reset, observe, cleanup
 - **Environment and dependency pressure** — env var names only, local substitutes, remote/secret requirements, mutation risk, and proof blockers
 
 ## Usage
@@ -38,7 +38,7 @@ AgentDX provides two modes of operation:
 |--|-------------------|----------------------|
 | **Purpose** | Assess and score your repo | Assess, then fix issues |
 | **Mode** | Assessment + report files | Interactive remediation |
-| **Output** | Score report in chat + `.agentdx/report.md` and `.agentdx/report.json` | Report + generated/fixed files |
+| **Output** | Score report in chat; optional `.agentdx/report.md` and `.agentdx/report.json` | Report + generated/fixed files |
 | **Use when** | You want a quick health check | You want guided fixes applied |
 | **Invocation** | `/agentdx:agentdx` or natural language | `/agents` → agentdx-fix |
 
@@ -71,8 +71,10 @@ Tool-scoped scans report only issues relevant to that platform plus universal re
 
 ### JSON Output
 
-Results are automatically saved to `.agentdx/report.json` and `.agentdx/report.md` for tracking over time. Request JSON in chat with:
+Request JSON in chat with:
 > "Run agentdx scan and output as JSON"
+
+Ask to persist the report when you want `.agentdx/report.json` and `.agentdx/report.md` written for tracking over time.
 
 ## Output
 

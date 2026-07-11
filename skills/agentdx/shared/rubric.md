@@ -43,7 +43,7 @@ Report an Agent Readiness Level alongside the 0-100 score. This is an interpreti
 | H0 Unknown | No reliable agent-facing command, setup, or validation surface was detected. |
 | H1 Front Door Exists | A command entrypoint, instructions, or task runner exists, but commands are generic, incomplete, or mostly inferred. |
 | H2 Assessed | Repo type, setup contract, commands, CI, services, and major proof gaps are mapped with file evidence. |
-| H3 Operable | At least one local setup, Diagnostics, boot, smoke, or fast validation path is configured and usable by an agent. |
+| H3 Operable | At least one local setup, diagnostics, boot, smoke, or fast validation path is configured and usable by an agent. |
 | H4 Proveable | A meaningful scenario can be exercised with a deterministic verdict and an observable consequence. |
 | H5 Compounding | The repo records friction, proof artifacts, known difficulties, and harness improvements so agent workflows improve over time. |
 

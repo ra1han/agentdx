@@ -45,7 +45,7 @@ Can an agent find the right command for each major validation tier?
 
 Check for these tiers where relevant:
 - `bootstrap` / setup dependencies
-- `Diagnostics` / preflight configuration check
+- `diagnostics` / preflight configuration check
 - `boot` / local start
 - `health` / readiness verification
 - `fast` or `quick` validation lane

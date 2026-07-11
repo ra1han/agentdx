@@ -1,36 +1,26 @@
 ---
 name: agentdx
-description: "Assess repository agentic engineering readiness. Scores agent configs, instruction quality, security, repo structure, setup, CI/CD, workflow, proof loops, and adaptability (0-100). Supports tool-scoped scans for Copilot, Claude, and Codex."
+description: Assess a repository's readiness for AI coding agents and developer automation. Use when asked to audit, score, review, or improve an agent-friendly repository setup, including agent instructions and configuration, safe environment setup, CI/local validation parity, proof loops, and maintainable development workflows. Supports full, category-scoped, and platform-scoped assessments for GitHub Copilot, Claude Code, and OpenAI Codex.
 ---
 
 # AgentDX: Agentic Engineering Readiness Assessment
 
-Assess how well a repository is set up for agentic engineering workflows. Produces a score (0-100), readiness level, proof level, confidence, and actionable findings.
+Assess a repository with direct evidence and produce an actionable 0–100 readiness report. Distinguish configured capabilities from capabilities that were actually exercised.
 
-**Trigger phrases:** "check agent readiness", "agentdx scan", "assess my repo for agents", "agentdx score", "how agent-friendly is this repo", "agentdx scan for copilot", "agentdx scan for claude"
+## 1. Resolve the Scope
 
-## Instructions
+Use the current workspace unless the user names a different repository or path. Before scanning, determine:
 
-When invoked, perform the following steps:
+- **Categories:** Scan all nine categories by default. For a selective request, scan only the named categories.
+- **Platform:** Use a cross-platform scan by default. When the user names GitHub Copilot, Claude Code, or OpenAI Codex, restrict platform-specific evaluation to that platform and universal repository hygiene.
+- **Mode:** Assess read-only by default. Save a report or apply fixes only when the user explicitly asks.
 
-### 1. Determine Scan Scope
+For a platform-scoped scan, do not inspect, score, compare, or recommend files belonging only to another platform. Always keep `AGENTS.md`, general documentation, CI, setup contracts, and secret hygiene in scope where relevant.
 
-Ask the user (or infer from their request) which categories to scan:
-- **Full scan** (default): All 9 categories
-- **Selective scan**: Only specified categories
-
-Also infer whether the request names a target tool/platform. Examples:
-- "run agentdx scan for copilot" → target platform: GitHub Copilot
-- "scan for claude" or "claude code readiness" → target platform: Claude Code
-- "scan for codex" or "codex readiness" → target platform: OpenAI Codex
-
-If no tool/platform is named, run a cross-platform scan. If a tool/platform is named, run a tool-scoped scan:
-- Evaluate only issues relevant to that platform plus universal repository hygiene.
-- Include universal/shared files such as `AGENTS.md`, `README.md`, `docs/`, CI, and general secret hygiene when the category uses them.
-- Exclude non-target platform files from scoring, findings, and recommendations. For example, a Copilot scan MUST NOT inspect or penalize `CLAUDE.md`, `.claude/**`, `.codex-plugin/**`, or `.agents/**`; a Claude scan MUST NOT penalize missing `.github/copilot-instructions.md`, `.github/instructions/**`, `.codex-plugin/**`, or `.agents/**`; a Codex scan MUST NOT penalize missing `CLAUDE.md`, `.claude/**`, `.github/copilot-instructions.md`, or `.github/instructions/**`.
-- Do not mention missing files for non-target platforms in the top recommendations.
+For a cross-platform scan, treat platform-specific files as applicable only when the platform is explicitly requested or directly evidenced by its configuration. Do not infer GitHub Copilot usage from GitHub Actions alone, and do not penalize a repository for unused platform ecosystems.
 
 Available categories:
+
 1. Agent Config Files
 2. Instruction Quality
 3. Security & Git Hygiene
@@ -41,96 +31,74 @@ Available categories:
 8. Proof & Feedback Loops
 9. Adaptability
 
-### 2. Load Rubric
+## 2. Load the Relevant Rubric
 
-Read `skills/agentdx/shared/rubric.md` for scoring weights and grade labels.
-
-### 3. Execute Category Checks
-
-For each selected category, read the corresponding category file and evaluate the repository:
+Read [shared/rubric.md](shared/rubric.md), then read one category file for every selected category:
 
 | Category | File |
-|----------|------|
-| Agent Config Files | `skills/agentdx/categories/agent-configs.md` |
-| Instruction Quality | `skills/agentdx/categories/instruction-quality.md` |
-| Security & Git Hygiene | `skills/agentdx/categories/security.md` |
-| Repository Structure | `skills/agentdx/categories/repo-structure.md` |
-| CI/CD Integration | `skills/agentdx/categories/ci-cd.md` |
-| Development Workflow | `skills/agentdx/categories/development-workflow.md` |
-| Setup & Environment | `skills/agentdx/categories/setup-environment.md` |
-| Proof & Feedback Loops | `skills/agentdx/categories/proof-feedback.md` |
-| Adaptability | `skills/agentdx/categories/adaptability.md` |
+|---|---|
+| Agent Config Files | [categories/agent-configs.md](categories/agent-configs.md) |
+| Instruction Quality | [categories/instruction-quality.md](categories/instruction-quality.md) |
+| Security & Git Hygiene | [categories/security.md](categories/security.md) |
+| Repository Structure | [categories/repo-structure.md](categories/repo-structure.md) |
+| CI/CD Integration | [categories/ci-cd.md](categories/ci-cd.md) |
+| Development Workflow | [categories/development-workflow.md](categories/development-workflow.md) |
+| Setup & Environment | [categories/setup-environment.md](categories/setup-environment.md) |
+| Proof & Feedback Loops | [categories/proof-feedback.md](categories/proof-feedback.md) |
+| Adaptability | [categories/adaptability.md](categories/adaptability.md) |
 
-For each category:
-1. Read the category file to understand what to check and how to score
-2. Apply the target platform filter before reading or scoring platform-specific files
-3. Detect the repository's tech stack using `skills/agentdx/shared/tech-stacks.md` as reference
-4. Use your tools (file search, file reading) to examine the target repository
-5. Evaluate each criterion as Pass/Partial/Fail
-6. Calculate the category score (0–100)
-7. Record individual findings with status emojis (✅ ⚠️ ❌)
+Read [shared/tech-stacks.md](shared/tech-stacks.md) only when evaluating instruction coverage or command expectations. Read [shared/report-format.md](shared/report-format.md) before composing the report.
 
-Also capture cross-cutting evidence while scanning:
-- `command_tiers`: bootstrap, Diagnostics, boot, health, fast, quick, proof, ci_equivalent, smoke, seed_or_reset, observe, cleanup, retro_or_improve
-- `ci_local_equivalence`: identical, equivalent, partial, divergent, local_only, ci_only, unknown
-- `environment_variables`: names only, source files, required/optional/unknown, secret-like, example/default availability
-- `external_dependencies`: dependency type, local option, remote/secret requirement, mutation risk, proof blockage
-- `test_mechanisms`: mock, fake, sink, stub, contract, testcontainer, in_memory, fixture, factory, snapshot, reset
-- `proof_surfaces`: static/build, runtime, consequence, external-effect, observability, human/inferential, production/customer
+## 3. Gather Evidence Safely
 
-Do not print secret values. Inspect only safe example values such as `.env.example`; for real `.env` files, report names or presence only.
+Inspect tracked files, manifests, task runners, CI definitions, test layout, safe environment examples, and repository documentation. Use narrow searches first; inspect representative files rather than indiscriminately loading generated, vendored, binary, or dependency directories.
 
-### 4. Calculate Overall Score
+Do not read or print values from real `.env` files, keychains, credential stores, shell histories, or secret-management tools. Report only a variable's name, source, and inferred requirement. Treat secret-like matches as leads until their tracked-file context confirms a real exposure; exclude clearly fake fixtures and documentation examples.
 
-- If full scan: Use weights from rubric directly
-- If selective: Re-weight selected categories proportionally to sum to 100%
+Do not run bootstrap, build, test, start, deploy, seed, reset, or cleanup commands during an assessment unless the user asks or a command is clearly non-mutating and safe to run. Record command evidence precisely:
 
-Overall score = sum of (category_score × normalized_weight)
+- **verified:** the current session ran the command successfully (or observed a deterministic failure).
+- **configured_unverified:** a command is declared in a manifest, workflow, or documentation but was not run.
+- **candidate_unverified:** a plausible command is inferred from project files but not declared as a supported workflow.
+- **not_applicable:** the tier does not fit the repository topology.
+- **unknown:** evidence is insufficient.
 
-Then derive report-level signals from the category evidence:
-- **Agent Readiness Level**: H0-H5 from `shared/rubric.md`
-- **Highest Proof Level**: L0-L6 from `shared/rubric.md`
-- **Target Next Proof Level**: the most valuable next proof level unlocked by the top recommendations
-- **Confidence**: High, Medium, or Low from evidence coverage and unknowns
+Never present configured or inferred commands as verified. Cite the file path, manifest entry, workflow job, or command output that supports every non-trivial finding.
 
-### 5. Format Report
+For each selected category, apply the platform filter before opening platform-specific files; evaluate each criterion as Pass, Partial, Fail, or N/A; and record concise findings with a status emoji. Use N/A only for topology- or platform-inapplicable criteria, then reweight the remaining applicable criteria. Do not use N/A merely because evidence was not collected.
 
-Read `skills/agentdx/shared/report-format.md` and produce the report following that template exactly.
+Capture these cross-cutting inventories when evidence exists:
 
-Include:
-- Overall score with grade label
-- Readiness level, highest proof level, target next proof level, and confidence
-- Target platform when the scan is tool-scoped
-- Category breakdown table
-- Per-category findings
-- Command tier summary, CI/local equivalence, environment/dependency pressure, and proof surface summary when evidence exists
-- Top 3 recommendations (prioritized by potential score improvement)
+- `command_tiers`: `bootstrap`, `setup_services`, `diagnostics`, `boot`, `health`, `fast`, `quick`, `proof`, `ci_equivalent`, `smoke`, `seed_or_reset`, `observe`, `cleanup`, `retro_or_improve`
+- `ci_local_equivalence`: `identical`, `equivalent`, `partial`, `divergent`, `local_only`, `ci_only`, or `unknown`
+- `environment_variables`: names only; source files; required, optional, or unknown; secret-like; example/default availability
+- `external_dependencies`: type, local option, remote/secret requirement, mutation risk, and proof blockage
+- `test_mechanisms`: mock, fake, sink, stub, contract, testcontainer, in-memory, fixture, factory, snapshot, or reset
+- `proof_surfaces`: static/build, runtime, consequence, external-effect, observability, human/inferential, or production/customer
 
-### 6. Present Results
+## 4. Calculate Scores and Signals
 
-Output the report directly in chat AND save it to the repository:
+- For a full scan, use the weights in `shared/rubric.md`.
+- For a selective scan, proportionally reweight only the selected categories to 100%.
+- Keep category scores at their calculated precision, calculate the weighted overall score, then round only the final score to the nearest whole number.
+- Derive the readiness level, highest proof level, target next proof level, and confidence from cited evidence. A target next proof level must be the next useful level unlocked by a concrete recommendation; do not claim runtime proof from static intent alone.
 
-1. **Chat output**: Always display the full report in the conversation
-2. **File output**: Save the results to `.agentdx/` directory:
-   - `.agentdx/report.md` — human-readable markdown report
-   - `.agentdx/report.json` — machine-readable JSON (using the JSON schema from report-format.md)
+Score the repository as it is, not against an assumed web-application topology. Libraries, CLIs, desktop/mobile applications, hardware projects, documentation repositories, and brownfield systems may have valid N/A tiers. Unknown evidence should reduce confidence or earn only the criterion's justified partial credit, not become a fabricated pass.
 
-The JSON file should include a `timestamp` field (ISO 8601) so teams can track score changes over time.
+## 5. Produce the Report
 
-If `.agentdx/` directory doesn't exist, create it. If previous reports exist, overwrite them (latest scan only).
+Follow [shared/report-format.md](shared/report-format.md). Include:
 
-Suggest the user add `.agentdx/` to `.gitignore` if they don't want reports committed, or commit them for team visibility/CI tracking.
+- overall score, grade, readiness/proof levels, target next proof level, and confidence;
+- target platform and selective-scan scope when applicable;
+- category scores, criteria findings, and evidence paths;
+- command tiers, CI/local equivalence, environment/dependency pressure, and proof mechanisms when evidence exists; and
+- three prioritized recommendations tied to observed gaps, including the expected proof-level improvement where relevant.
 
-## Important Notes
+Recommendations must be proportionate and executable. Prefer a deterministic check, fixture, fake, sink, diagnostic, smoke path, or architecture rule over prose when that creates stronger evidence. Do not recommend configuration for an unobserved platform or introduce a task runner, service, dependency, or destructive operation without a clear need.
 
-- This is an assessment tool. Do NOT offer to fix issues unless the user explicitly asks.
-- Be fair in scoring: not every project needs every feature. Context matters.
-- Guidance is orientation, not proof. Prefer recommendations that encode important behavior as executable checks, fixtures, fakes, sinks, diagnostics, schemas, smoke paths, or architecture rules.
-- Do not over-penalize desktop, mobile, hardware, brownfield, or library topologies for lacking web-style boot or UI smoke paths. Mark topology-intrinsic manual signals as informational.
-- MCP and custom skills are scored as bonuses within Agent Config Files and Instruction Quality — their absence does not penalize.
-- Instruction Quality depends on Agent Config Files — if no config files exist, Instruction Quality automatically scores 0.
-- Tool-scoped scans must not score or recommend fixes for non-target platform files. A Copilot scan should ignore Claude-specific files entirely, including `CLAUDE.md` and `.claude/**`.
-- Security: if no `.claude/` directory exists, only score secrets and sensitive files criteria.
-- Be specific in findings. "Missing X" is better than "could be improved."
-- If the user asks for JSON output, use the JSON format defined in the report format file.
-- If the user wants fixes applied, suggest using the `agentdx-fix` agent instead.
+Display the full Markdown report in chat. If the user explicitly requests persisted output, write `.agentdx/report.md` and `.agentdx/report.json` using the JSON structure in `shared/report-format.md`; state that these files are being created or replaced before writing them. Include an ISO 8601 `timestamp` and never put secret values in either report.
+
+## 6. Hand Off Remediation
+
+This assessment does not modify repository files by default. If the user asks to improve the repository, use the `agentdx-fix` remediation agent or follow its workflow: propose evidence-backed, low-risk fixes, obtain the required approval for consequential changes, apply the smallest coherent set, and run relevant validation.
