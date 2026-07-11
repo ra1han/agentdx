@@ -51,7 +51,7 @@ Scoring:
 Is there a low-risk way to check setup before booting or changing state?
 
 Look for:
-- `setup`, `bootstrap`, `Diagnostics`, `preflight`, `config --check`, `--dry-run`, or equivalent commands
+- `setup`, `bootstrap`, `diagnostics`, `preflight`, `config --check`, `--dry-run`, or equivalent commands
 - documented expected success/failure output
 - non-mutating validation of required tools, env vars, and local services
 

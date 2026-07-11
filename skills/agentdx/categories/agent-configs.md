@@ -1,7 +1,7 @@
 # Category: Agent Config Files
 
 ## Purpose
-Assess the presence, location, and completeness of agent configuration files in the repository. Includes platform detection and advanced Claude Code ecosystem checks.
+Assess the presence, location, and completeness of agent configuration files in the repository. Include only platforms that the user selected or that have direct configuration evidence; GitHub Actions alone is not evidence of GitHub Copilot usage.
 
 ## Files to Check
 
@@ -38,14 +38,12 @@ For a tool-scoped scan, do not read, score, list, or recommend missing files fro
 ## Criteria
 
 ### 1. File Existence (30% of category score)
-For each primary instruction file, check if it exists in the expected location.
+For each applicable primary instruction file, check if it exists in the expected location. `AGENTS.md` is a universal instruction surface, not a requirement to duplicate every platform's instructions.
 - **Pass**: File exists at correct location
 - **Partial**: File exists but in wrong location (e.g., `copilot-instructions.md` at root instead of `.github/`)
 - **Missing**: File does not exist
 
-Score: (files found / 5) × 100. Award partial credit (half) for mislocated files.
-
-Note: Not every project needs every platform file. Award full marks if at least 2 platform-specific files exist AND they cover the platforms the project actually uses (check for platform indicators like `.github/workflows/` for Copilot, `.claude/` for Claude Code, or `.codex-plugin/` for Codex).
+Score against applicable files only. Award partial credit (half) for mislocated files. In a cross-platform scan, a platform-specific file is applicable only when its platform is directly evidenced by files such as `.github/copilot-instructions.md`, `.claude/**`, `.codex-plugin/**`, or `.agents/**`, or when the user explicitly requests that platform. Do not use `.github/workflows/` alone as a Copilot indicator.
 
 ### 2. Minimum Substance (25% of category score)
 For each found file, verify it has meaningful content:
@@ -68,7 +66,7 @@ Scoring:
 ### 4. Claude Code Ecosystem (20% of category score)
 Check for advanced Claude Code configuration that improves agent effectiveness:
 
-This criterion applies only to cross-platform scans and Claude Code scans. For GitHub Copilot or OpenAI Codex scans, mark this criterion N/A and reweight the remaining Agent Config Files criteria proportionally.
+This criterion applies to Claude Code scans and to cross-platform scans with direct Claude Code configuration evidence. For GitHub Copilot or OpenAI Codex scans, or cross-platform scans with no Claude Code evidence, mark this criterion N/A and reweight the remaining Agent Config Files criteria proportionally.
 
 - **`.claude/settings.json`**: Project settings committed for team sharing
 - **`.claude/rules/*.md`**: Scoped rules with `paths:` frontmatter for lazy-loading
@@ -105,7 +103,7 @@ Note: MCP is relatively new. Not every project needs it. Do not penalize absence
 
 ### 6. Platform Detection (Informational — not scored)
 Detect which platforms are in use and report in findings:
-- Check for `.github/workflows/` → GitHub Copilot likely in use
+- Check for `.github/copilot-instructions.md`, `.github/instructions/**`, `.github/prompts/**`, `.github/copilot/**`, or `.vscode/mcp.json` → GitHub Copilot configuration present
 - Check for `CLAUDE.md` or `.claude/` → Claude Code in use
 - Check for `.codex-plugin/` or `.agents/plugins/` → OpenAI Codex likely in use
 
