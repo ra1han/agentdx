@@ -2,6 +2,11 @@
 
 All notable changes to AgentDX will be documented in this file.
 
+## [Unreleased]
+
+### Added
+- **`project-summary` skill** — generates a detailed, evidence-based codebase overview covering purpose, tech stack, architecture, component responsibilities, data flow, external integrations, and CI/CD configuration. Displays the summary (with Mermaid diagrams) in chat by default and writes `PROJECT_SUMMARY.md` only on explicit request. Supports section-scoped summaries and safe, secret-free evidence gathering.
+
 ## [1.2.0] - 2026-06-14
 
 ### Added

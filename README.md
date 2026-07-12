@@ -126,6 +126,16 @@ Active agent platforms: Claude Code, GitHub Copilot
 3. Add `.env.example` with required env var names and safe local defaults (+5 points)
 ```
 
+## Project Summary Skill
+
+This plugin also ships a `project-summary` skill that generates a detailed, evidence-based overview of any codebase — its purpose, tech stack, architecture, component responsibilities, data flow, external integrations, and CI/CD configuration.
+
+Ask for it in natural language:
+> "Summarize this project" · "Explain the architecture and data flow" · "Generate a project overview"
+
+It displays the summary (with Mermaid diagrams where useful) in chat by default, and writes `PROJECT_SUMMARY.md` only when you explicitly ask to persist it. You can scope it to specific sections:
+> "Just document the tech stack and CI/CD setup"
+
 ## Installation
 
 ### GitHub Copilot CLI
@@ -215,6 +225,10 @@ agentdx/
 │   ├── SKILL.md               # Main assessment skill
 │   ├── categories/            # Scoring rubrics per category
 │   └── shared/                # Rubric weights & report format
+├── skills/project-summary/
+│   ├── SKILL.md               # Codebase overview generator skill
+│   ├── references/            # Section-by-section analysis guide
+│   └── templates/             # Summary report format
 ├── agents/
 │   └── agentdx-fix.md         # Diagnostic & fix agent
 ├── plugin.json                # Root plugin metadata
