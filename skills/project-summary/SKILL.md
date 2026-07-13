@@ -13,7 +13,7 @@ Use the current workspace unless the user names a different repository or path. 
 
 - **Depth:** Produce a full summary by default (all sections). For a focused request, generate only the named sections (for example, "just the architecture and data flow").
 - **Audience:** Default to a new-engineer onboarding audience. Adjust emphasis when the user names a different audience (executive overview, security review, migration planning).
-- **Output:** Display the summary in chat by default. Write a file only when the user explicitly asks; then create `PROJECT_SUMMARY.md` at the repository root and state that it is being created or replaced before writing.
+- **Output:** Display the summary in chat by default. Write a file only when the user explicitly asks; then create `.agentdx/project-summary.md` (creating the `.agentdx/` directory if needed) and state that it is being created or replaced before writing.
 
 Available sections:
 
@@ -62,4 +62,4 @@ For each in-scope section, follow the guidance in the analysis guide:
 
 Follow [templates/summary-template.md](templates/summary-template.md). Keep the summary proportionate to the project: a small library needs a short summary; a large multi-service system warrants component and data-flow detail. Prefer accurate, concise prose and diagrams over exhaustive file listings.
 
-Display the full Markdown summary in chat. If the user explicitly requests persisted output, write `PROJECT_SUMMARY.md` at the repository root, state that the file is being created or replaced, and never include secret values.
+Display the full Markdown summary in chat. If the user explicitly requests persisted output, write `.agentdx/project-summary.md` (creating the `.agentdx/` directory if needed), state that the file is being created or replaced, and never include secret values.

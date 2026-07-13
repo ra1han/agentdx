@@ -133,7 +133,7 @@ This plugin also ships a `project-summary` skill that generates a detailed, evid
 Ask for it in natural language:
 > "Summarize this project" · "Explain the architecture and data flow" · "Generate a project overview"
 
-It displays the summary (with Mermaid diagrams where useful) in chat by default, and writes `PROJECT_SUMMARY.md` only when you explicitly ask to persist it. You can scope it to specific sections:
+It displays the summary (with Mermaid diagrams where useful) in chat by default, and writes `.agentdx/project-summary.md` only when you explicitly ask to persist it. You can scope it to specific sections:
 > "Just document the tech stack and CI/CD setup"
 
 ## Installation
